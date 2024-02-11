@@ -11,10 +11,12 @@ import Toast from "./utils/Toast";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { setUser } from "../state/AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const dispatch = useDispatch()
-  const [isLogin, setIsLogin] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,12 +40,12 @@ const Login = () => {
           },
         }
       );
-      toast.success("Profile picture uploaded")
+      toast.success("Profile picture uploaded");
       setImageName(response.data.filename);
       setImagePath(BASE_URL + "/assets/" + response.data.filename);
     } catch (error) {
       console.log(error);
-      toast.error("There was some problem uploading the image")
+      toast.error("There was some problem uploading the image");
     }
   };
   const register = async () => {
@@ -57,31 +59,32 @@ const Login = () => {
 
     try {
       const response = await axios.post(BASE_URL + "/auth/register", data);
-      console.log("this is res",response);
-      toast.success("You're signed up!!")
+      console.log("this is res", response);
+      toast.success("You're signed up!!");
     } catch (error) {
       console.error("Error:", error);
-      setError(error.response.data.error)
-      toast.error("Some error occurred")
+      setError(error.response.data.error);
+      toast.error("Some error occurred");
     }
   };
-  const login=async()=>{
-    const data = {loginId:email, password}
+  const login = async () => {
+    const data = { loginId: email, password };
     try {
-        const response = await axios.post(BASE_URL + "/auth/login", data);
-        console.log(response.data);
-        toast.success('Logged in')
-        dispatch(setUser(response.data))
-      } catch (error) {
-        toast.error("Some error occurred")
-      }
-  }
+      const response = await axios.post(BASE_URL + "/auth/login", data);
+      console.log(response.data);
+      toast.success("Logged in");
+      dispatch(setUser(response.data));
+      navigate('/')
+    } catch (error) {
+      toast.error("Some error occurred");
+    }
+  };
   const handleLoginAndSignUp = () => {
     if (isLogin) {
       const error = validateLoginData({ loginId: email, password });
       if (error) return setError(error);
       setError(null);
-      login()
+      login();
     } else {
       const error = validateSignUpData({
         name,
@@ -97,7 +100,7 @@ const Login = () => {
   };
   return (
     <div className="bg-[--bg-light] dark:bg-[--bg-dark] md:w-fit w-full mx-auto flex flex-col gap-3 px-3 h-screen items-center justify-center text-[--text-dark] dark:text-[--text-light]">
-        <Toast/>
+      <Toast />
       {!isLogin && (
         <div className="border border-[--border-light] flex justify-center items-center overflow-hidden h-32 w-32 rounded-full mb-5">
           {imagePath && (
