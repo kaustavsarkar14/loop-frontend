@@ -13,11 +13,11 @@ const Navbar = () => {
   const theme = useSelector((state) => state.app.theme);
   const dispatch = useDispatch();
   return (
-    <div className="w-full flex justify-between bg-[--bg-dark] text-[--text-light] md:px-[10%] py-3 px-8">
+    <div className="w-full flex justify-between bg-[--bg-light] dark:bg-[--bg-dark] text-[--text-dark] dark:text-[--text-light] md:px-[10%] py-3 px-8">
       <div className="w-24">
         <h1>LOGO</h1>
       </div>
-      <div className="md:w-[20rem] flex justify-between md:static absolute bottom-0 left-0 w-full bg-[--bg-dark] md:p-0 p-3">
+      <div className="md:w-[20rem] flex justify-between md:static absolute bottom-0 left-0 w-full bg-[--bg-light] dark:bg-[--bg-dark] md:p-0 p-3">
         <HomeOutlinedIcon fontSize="medium" />
         <SearchRoundedIcon />
         <AddBoxOutlinedIcon />

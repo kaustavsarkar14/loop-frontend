@@ -10,7 +10,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <div className="dark:bg-[--bg-dark] bg-[--bg-light] min-h-screen" >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
