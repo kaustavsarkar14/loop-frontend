@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '../components/Navbar.js'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div className="flex flex-col md:flex-row">
+      <Navbar/>
+    </div>
   )
 }
 
