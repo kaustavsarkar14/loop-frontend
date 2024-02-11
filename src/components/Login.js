@@ -9,8 +9,11 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import Toast from "./utils/Toast";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setUser } from "../state/AuthSlice";
 
 const Login = () => {
+    const dispatch = useDispatch()
   const [isLogin, setIsLogin] = useState(false);
   const [error, setError] = useState(null);
   const [name, setName] = useState("");
@@ -67,7 +70,8 @@ const Login = () => {
     try {
         const response = await axios.post(BASE_URL + "/auth/login", data);
         console.log(response.data);
-        toast.error('Logged in')
+        toast.success('Logged in')
+        dispatch(setUser(response.data))
       } catch (error) {
         toast.error("Some error occurred")
       }
