@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../state/AuthSlice";
 import { Navigate, useNavigate } from "react-router-dom";
+import {handleImageUpload} from "../utils/functions";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -27,28 +28,7 @@ const Login = () => {
   const [imageName, setImageName] = useState(null);
   const [imagePath, setImagePath] = useState(null);
 
-  const handleImageUpload = async (e) => {
-    if (!e.target.files[0]) return;
-    try {
-      const formData = new FormData();
-      formData.append("picture", e.target.files[0]);
-      const response = await axios.post(
-        "http://localhost:8000/uploadfile",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      toast.success("Profile picture uploaded");
-      setImageName(response.data.filename);
-      setImagePath(BASE_URL + "/assets/" + response.data.filename);
-    } catch (error) {
-      console.log(error);
-      toast.error("There was some problem uploading the image");
-    }
-  };
+
   const register = async () => {
     const data = {
       name,
@@ -119,7 +99,7 @@ const Login = () => {
             type="file"
             id="picture"
             className="hidden"
-            onInput={handleImageUpload}
+            onInput={e=>handleImageUpload(e, setImagePath,setImageName)}
           />
         </div>
       )}
