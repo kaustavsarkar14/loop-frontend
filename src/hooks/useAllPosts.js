@@ -5,25 +5,37 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPosts, setLoading } from "../state/PostSlice";
 
 export default function useAllPosts(page) {
-  const token = useSelector((state) => state.auth.token);
+  const { token, loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   async function fetchPosts() {
-    if (!token) return;
-    try {
-      const response = await axios.get(BASE_URL + "/post/get", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      dispatch(addPosts(response.data));
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
+    if (!token) {
+      try {
+        const response = await axios.get(BASE_URL + "/post/getall");
+        console.log(response);
+        dispatch(addPosts(response.data));
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+      dispatch(setLoading(false));
+    } else {
+      if (!token) return;
+      try {
+        const response = await axios.get(BASE_URL + "/post/get", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        dispatch(addPosts(response.data));
+      } catch (error) {
+        console.log(error);
+      }
     }
     dispatch(setLoading(false));
   }
 
   useEffect(() => {
+    if (loading) return;
     fetchPosts();
-  }, [page, token]);
+  }, [page, token, loading]);
 }

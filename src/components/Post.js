@@ -3,7 +3,7 @@ import { BASE_URL } from "../utils/constants";
 
 const Post = ({ post }) => {
   return (
-    <div className="flex border gap-2 p-2 pr-8 border-[--border-light] rounded-md">
+    <div className="flex border gap-2 p-2 pr-8 dark:border-[--border-light] rounded-md">
         <img className="h-8 w-8 rounded-full object-cover" src={BASE_URL+"/assets/"+ post.userId?.picturePath} alt="" />
       <div>
         <div className="flex gap-1 items-end">

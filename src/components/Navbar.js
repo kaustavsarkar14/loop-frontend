@@ -14,8 +14,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   return (
     <>
-     <div className="w-full sticky top-0 z-10 flex justify-between bg-white bg-opacity-60 dark:bg-[--bg-black] dark:bg-opacity-60 text-[--text-dark] dark:text-[--text-light] md:px-[10%] h-12 items-center backdrop-blur-3xl px-8">
-
+      <div className="w-full sticky top-0 z-10 flex justify-between bg-white bg-opacity-60 dark:bg-[--bg-black] dark:bg-opacity-60 text-[--text-dark] dark:text-[--text-light] md:px-[10%] h-12 items-center backdrop-blur-3xl px-8">
         <div className="w-24">
           <h1>LOGO</h1>
         </div>
@@ -23,8 +22,8 @@ const Navbar = () => {
           <NavbarMenu />
         </div>
       </div>
-      <div className="md:w-[25rem] z-20 md:h-12 md:flex md:items-center mx-auto flex justify-between fixed md:top-0 md:bottom-auto bottom-0 left-0 right-0 w-full bg-white dark:bg-black md:bg-transparent md:dark:bg-transparent md:p-0 p-3 bg-opacity-60 dark:bg-opacity-60 backdrop-blur-3xl">
-        <HomeOutlinedIcon fontSize="medium" />
+      <div className="md:w-[25rem] fixed z-20 md:h-12 md:flex md:items-center left-1/2 translate-x-[-50%] flex justify-between md:top-0 md:bottom-auto bottom-0 right-0 w-full bg-white dark:bg-black md:bg-transparent md:dark:bg-transparent md:p-0 p-3 bg-opacity-60 dark:bg-opacity-60 backdrop-blur-3xl md:backdrop-blur-0">
+        <HomeOutlinedIcon />
         <SearchRoundedIcon />
         <AddBoxOutlinedIcon />
         <Person2OutlinedIcon />

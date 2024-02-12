@@ -1,6 +1,8 @@
 import axios from "axios";
 import { BASE_URL } from "./constants";
 import toast from "react-hot-toast";
+import {  createPost } from "../state/PostSlice";
+import { setLoading } from "../state/AuthSlice";
 
 export async function handleImageUpload(e, setImagePath, setImageName) {
   if (!e.target.files[0]) return;
@@ -25,13 +27,14 @@ export async function handleImageUpload(e, setImagePath, setImageName) {
   }
 }
 
-export async function handlePost({ title, imageName, token }) {
+export async function handlePost({ title, imageName, token, dispatch, user }) {
+  dispatch(setLoading(true))
   try {
     const response = await axios.post(
       BASE_URL + "/post/create",
       {
         title,
-        image: imageName,
+        image: imageName || "",
       },
       {
         headers: {
@@ -40,9 +43,10 @@ export async function handlePost({ title, imageName, token }) {
       }
     );
     toast.success("Post sent");
-    console.log(response.data)
+    dispatch(createPost([{ ...response.data, userId: user }]));
   } catch (error) {
     console.log(error);
     toast.error("Failed to send post");
   }
+  dispatch(setLoading(false))
 }

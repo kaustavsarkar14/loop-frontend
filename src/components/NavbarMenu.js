@@ -14,8 +14,10 @@ export default function NavbarMenu() {
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
+    event.stopPropagation(); // Stop the event from propagating further
     setAnchorEl(event.currentTarget);
   };
+  
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -35,6 +37,7 @@ export default function NavbarMenu() {
         <MenuRoundedIcon />
       </div>
       <Menu
+      className="absolute bottom-0"
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
