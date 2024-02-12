@@ -3,7 +3,7 @@ import Feed from './Feed'
 
 const Body = () => {
   return (
-    <div className='h-[200vh] bg-[--bg-light] dark:bg-[--bg-dark] flex justify-center' >
+    <div className='min-h-screen bg-[--bg-light] dark:bg-[--bg-dark] flex justify-center' >
         <Feed/>
     </div>
   )
