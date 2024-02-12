@@ -13,20 +13,22 @@ const Navbar = () => {
   const theme = useSelector((state) => state.app.theme);
   const dispatch = useDispatch();
   return (
-    <div className="w-full flex justify-between bg-[--bg-light] dark:bg-[--bg-dark] text-[--text-dark] dark:text-[--text-light] md:px-[10%] py-3 px-8">
-      <div className="w-24">
-        <h1>LOGO</h1>
+    <>
+      <div className="w-full sticky top-0 flex justify-between bg-[--bg-light] dark:bg-[--bg-dark] text-[--text-dark] dark:text-[--text-light] md:px-[10%] h-12 items-center px-8">
+        <div className="w-24">
+          <h1>LOGO</h1>
+        </div>
+        <div className="w-24 text-right">
+          <NavbarMenu />
+        </div>
       </div>
-      <div className="md:w-[20rem] flex justify-between md:static absolute bottom-0 left-0 w-full bg-[--bg-light] dark:bg-[--bg-dark] md:p-0 p-3">
+      <div className="md:w-[25rem] md:h-12 md:flex md:items-center mx-auto flex justify-between fixed md:top-0 md:bottom-auto bottom-0 left-0 right-0 w-full bg-[--bg-light] dark:bg-[--bg-dark] md:p-0 p-3">
         <HomeOutlinedIcon fontSize="medium" />
         <SearchRoundedIcon />
         <AddBoxOutlinedIcon />
         <Person2OutlinedIcon />
       </div>
-      <div className="w-24 text-right">
-        <NavbarMenu />
-      </div>
-    </div>
+    </>
   );
 };
 

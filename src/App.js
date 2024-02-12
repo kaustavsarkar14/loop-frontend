@@ -9,14 +9,15 @@ import Protected from "./components/utils/Protected";
 
 function App() {
   const theme = useMUITheme();
-  useUserFromToken()
+  useUserFromToken();
   return (
     <ThemeProvider theme={theme}>
-      <div className="dark:bg-[--bg-dark] bg-[--bg-light] min-h-screen" >
+      <div className="dark:bg-[--bg-dark] bg-[--bg-light] min-h-screen text-[--text-dark] dark:text-[--text-light]">
         <Routes>
-          <Route path="/" element={<Protected><HomePage /></Protected>} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile/:id" element={<ProfilePage />} />
+          <Route path="/verifymail" element={<ProfilePage />} />
         </Routes>
       </div>
     </ThemeProvider>

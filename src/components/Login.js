@@ -9,12 +9,13 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import Toast from "./utils/Toast";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../state/AuthSlice";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const user = useSelector(state=>state.auth.user)
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState(null);
@@ -98,6 +99,7 @@ const Login = () => {
       register();
     }
   };
+  // if(user) return <Navigate to={"/"} />
   return (
     <div className="bg-[--bg-light] dark:bg-[--bg-dark] md:w-fit w-full mx-auto flex flex-col gap-3 px-3 h-screen items-center justify-center text-[--text-dark] dark:text-[--text-light]">
       <Toast />

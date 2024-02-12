@@ -1,13 +1,17 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../state/AppSlice";
+import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 export default function NavbarMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const dispatch = useDispatch()
+  const theme = useSelector((state) => state.app.theme);
+  const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -15,10 +19,10 @@ export default function NavbarMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleTheme=()=>{
-    dispatch(toggleTheme())
-    setAnchorEl(false)
-  }
+  const handleTheme = () => {
+    dispatch(toggleTheme());
+    setAnchorEl(false);
+  };
   return (
     <div>
       <div
@@ -40,11 +44,27 @@ export default function NavbarMenu() {
         }}
       >
         <div className="flex flex-col w-fit px-2">
-          <button className="py-1">Profile</button>
+          <button className="py-1 flex justify-start items-center gap-2">
+            <Person2OutlinedIcon fontSize="small" />
+            <span>Profile</span>
+          </button>
           <hr className="opacity-20" />
-          <button className="py-1" onClick={handleTheme}>Light Theme</button>
+          <button
+            className="py-1 flex justify-start items-center gap-2"
+            onClick={handleTheme}
+          >
+            {theme == "dark" ? (
+              <WbSunnyRoundedIcon />
+            ) : (
+              <DarkModeOutlinedIcon fontSize="small" />
+            )}
+            <span>{theme == "dark" ? "Light Theme" : "Dark Theme"}</span>
+          </button>
           <hr className="opacity-20" />
-          <button className="py-1">Log out</button>
+          <button className="py-1 flex justify-start items-center gap-2">
+            <LogoutOutlinedIcon fontSize="small" />
+            <span>Log out</span>
+          </button>
         </div>
       </Menu>
     </div>
