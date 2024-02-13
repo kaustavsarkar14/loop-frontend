@@ -1,75 +1,46 @@
-import * as React from "react";
-import Menu from "@mui/material/Menu";
+import { DropdownMenu } from "@radix-ui/themes";
+import React from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { useDispatch, useSelector } from "react-redux";
+import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
+import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import { toggleTheme } from "../state/AppSlice";
-import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import LogoutAlert from "./LogoutAlert";
 
-export default function NavbarMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+const NavbarMenu = () => {
   const theme = useSelector((state) => state.app.theme);
-  const dispatch = useDispatch();
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    event.stopPropagation(); // Stop the event from propagating further
-    setAnchorEl(event.currentTarget);
-  };
-  
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleTheme = () => {
-    dispatch(toggleTheme());
-    setAnchorEl(false);
-  };
+  const dispatch = useDispatch()
   return (
     <div>
-      <div
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        className="cursor-pointer"
-      >
-        <MenuRoundedIcon />
-      </div>
-      <Menu
-      className="absolute bottom-0"
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        <div className="flex flex-col w-fit px-2">
-          <button className="py-1 flex justify-start items-center gap-2">
-            <Person2OutlinedIcon fontSize="small" />
-            <span>Profile</span>
-          </button>
-          <hr className="opacity-20" />
-          <button
-            className="py-1 flex justify-start items-center gap-2"
-            onClick={handleTheme}
-          >
-            {theme == "dark" ? (
-              <WbSunnyRoundedIcon />
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <div className="cursor-pointer">
+            <MenuRoundedIcon />
+          </div>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Item className="flex gap-3">
+            <p>Profile</p>
+            <AccountCircleOutlinedIcon fontSize="small" />
+          </DropdownMenu.Item>
+          <DropdownMenu.Item className="flex gap-3" onClick={()=>dispatch(toggleTheme())}>
+            <p>{theme === "dark" ? "Light mode" : "Dark mode"}</p>
+            {theme === "dark" ? (
+              <LightModeRoundedIcon fontSize="small" />
             ) : (
-              <DarkModeOutlinedIcon fontSize="small" />
+              <DarkModeRoundedIcon fontSize="small" />
             )}
-            <span>{theme == "dark" ? "Light Theme" : "Dark Theme"}</span>
-          </button>
-          <hr className="opacity-20" />
-          <button className="py-1 flex justify-start items-center gap-2">
-            <LogoutOutlinedIcon fontSize="small" />
-            <span>Log out</span>
-          </button>
-        </div>
-      </Menu>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item color="red" onClick={e=>e.preventDefault()} className="flex gap-3">
+            <LogoutAlert/>
+            <LogoutRoundedIcon fontSize="small" />
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
     </div>
   );
-}
+};
+
+export default NavbarMenu;

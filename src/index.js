@@ -5,13 +5,17 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./state/store";
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
       {/* <React.StrictMode> */}
+      <Theme>
         <App />
+      </Theme>
       {/* </React.StrictMode> */}
     </BrowserRouter>
   </Provider>

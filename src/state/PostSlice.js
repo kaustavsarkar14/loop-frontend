@@ -16,8 +16,11 @@ const PostSlice = createSlice({
     createPost: (state, action) => {
       state.allPosts = [...action.payload,...state.allPosts ];
     },
+    clearPosts : (state, action)=>{
+      state.allPosts = []
+    }
   },
 });
 
-export const { setLoading, addPosts,createPost } = PostSlice.actions;
+export const { setLoading, addPosts,createPost,clearPosts } = PostSlice.actions;
 export default PostSlice.reducer;

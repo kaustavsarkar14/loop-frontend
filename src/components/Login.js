@@ -12,12 +12,13 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../state/AuthSlice";
 import { Navigate, useNavigate } from "react-router-dom";
-import {handleImageUpload} from "../utils/functions";
+import { handleImageUpload } from "../utils/functions";
+import { clearPosts } from "../state/PostSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state=>state.auth.user)
-  const navigate = useNavigate()
+  const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState(null);
   const [name, setName] = useState("");
@@ -27,7 +28,6 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [imageName, setImageName] = useState(null);
   const [imagePath, setImagePath] = useState(null);
-
 
   const register = async () => {
     const data = {
@@ -55,7 +55,8 @@ const Login = () => {
       console.log(response.data);
       toast.success("Logged in");
       dispatch(setUser(response.data));
-      navigate('/')
+      dispatch(clearPosts());
+      navigate("/");
     } catch (error) {
       toast.error("Some error occurred");
     }
@@ -99,7 +100,7 @@ const Login = () => {
             type="file"
             id="picture"
             className="hidden"
-            onInput={e=>handleImageUpload(e, setImagePath,setImageName)}
+            onInput={(e) => handleImageUpload(e, setImagePath, setImageName)}
           />
         </div>
       )}

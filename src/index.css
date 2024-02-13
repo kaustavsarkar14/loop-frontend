@@ -2,11 +2,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   margin: 0;
   font-family: 'Rubik', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  overflow-x: hidden;
+  padding-right: calc(0 - var(--removed-body-scroll-bar-size)) !important;
 }
 
 code {
@@ -14,12 +18,12 @@ code {
     monospace;
 }
 :root {
-  --text-light: rgb(171, 171, 171);
+  --text-light: rgb(240, 240, 240);
   --text-dark: black;
   --bg-light : white;
   --bg-dark : #101010;
   --border-light:rgba(255, 255, 255, 0.08);
-  --border-dark:rgba(0, 0, 0, 0.712);
+  --border-dark:rgba(197, 197, 197, 0.712);
   --app-dark: black;
   --app-light: white;
 }
