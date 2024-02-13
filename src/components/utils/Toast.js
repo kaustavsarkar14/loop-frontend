@@ -12,7 +12,7 @@ const Toast = () => {
           border: "1px solid #3B82F6",
           padding: "10px 16px",
           color: "white",
-          backgroundColor:theme==="dark"?"black":"white",
+          backgroundColor:theme==="dark"?"#101010":"white",
         },
         iconTheme: {
             primary: '#3B82F6',

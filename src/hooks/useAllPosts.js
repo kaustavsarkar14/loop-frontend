@@ -10,7 +10,9 @@ export default function useAllPosts(page) {
   async function fetchPosts() {
     if (!token) {
       try {
-        const response = await axios.get(BASE_URL + "/post/getall");
+        const response = await axios.get(
+          BASE_URL + `/post/getall?page=${page}`
+        );
         console.log(response);
         dispatch(addPosts(response.data));
         console.log(response.data);
@@ -21,11 +23,12 @@ export default function useAllPosts(page) {
     } else {
       if (!token) return;
       try {
-        const response = await axios.get(BASE_URL + "/post/get", {
+        const response = await axios.get(BASE_URL + `/post/get?page=${page}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log(`/post/get?page=${page}`)
         dispatch(addPosts(response.data));
       } catch (error) {
         console.log(error);

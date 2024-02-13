@@ -1,3 +1,10 @@
+# TODO
+
+add verification for user
+add verification with payment
+scrollbar style
+remove some posts from top after a certain amount of post 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

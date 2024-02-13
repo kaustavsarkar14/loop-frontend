@@ -13,7 +13,7 @@ const Post = ({ post }) => {
       <div>
         <div className="flex gap-1 items-center">
           <h2 className="font-semibold">{post.userId?.name}</h2>
-          <h3 className="opacity-55 text-sm">@{post.userId?.username}</h3>
+          <h3 className="opacity-55 text-sm">@{post.userId?.username} • {typeof post.creationDateAndTime}</h3>
         </div>
         {post.title}
         <img

@@ -59,7 +59,7 @@ export async function handlePost({
 
 export async function handleDeletePost({ postId, token, dispatch }) {
   try {
-    // dispatch(deletePost({ postId }));
+    dispatch(deletePost({ postId }));
     const response = await axios.post(
       BASE_URL + "/post/delete",
       {
