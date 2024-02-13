@@ -10,14 +10,15 @@ import { BASE_URL } from "../utils/constants";
 import Toast from "./utils/Toast";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../state/AuthSlice";
+import { setAuthLoading, setUser } from "../state/AuthSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 import { handleImageUpload } from "../utils/functions";
-import { clearPosts } from "../state/PostSlice";
+import { clearPosts, setLoading } from "../state/PostSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+  const [isButtonLoading, setButtonLoading] = useState(false);
+  const { user, loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState(null);
@@ -37,18 +38,21 @@ const Login = () => {
       password,
       picturePath: imageName || "",
     };
-
+    setButtonLoading(true);
     try {
       const response = await axios.post(BASE_URL + "/auth/register", data);
       console.log("this is res", response);
       toast.success("You're signed up!!");
+      setIsLogin(true);
     } catch (error) {
       console.error("Error:", error);
       setError(error.response.data.error);
       toast.error("Some error occurred");
     }
+    setButtonLoading(false);
   };
   const login = async () => {
+    setButtonLoading(true);
     const data = { loginId: email, password };
     try {
       const response = await axios.post(BASE_URL + "/auth/login", data);
@@ -56,10 +60,13 @@ const Login = () => {
       toast.success("Logged in");
       dispatch(setUser(response.data));
       dispatch(clearPosts());
+      dispatch(setAuthLoading(false));
+      dispatch(setLoading(true));
       navigate("/");
     } catch (error) {
       toast.error("Some error occurred");
     }
+    setButtonLoading(false);
   };
   const handleLoginAndSignUp = () => {
     if (isLogin) {
@@ -80,7 +87,7 @@ const Login = () => {
       register();
     }
   };
-  // if(user) return <Navigate to={"/"} />
+  if (user) return <Navigate to={"/"} />;
   return (
     <div className="bg-[--bg-light] dark:bg-[--bg-dark] md:w-fit w-full mx-auto flex flex-col gap-3 px-3 h-screen items-center justify-center text-[--text-dark] dark:text-[--text-light]">
       <Toast />
@@ -187,7 +194,7 @@ const Login = () => {
         onClick={handleLoginAndSignUp}
         className="font-semibold w-full text-[--text-dark] dark:text-[--text-light] border border-[--border-dark] dark:border-[--border-light] py-3 px-4 rounded-md mt-3"
       >
-        {isLogin ? "Log in" : "Sign up"}
+        {isButtonLoading ? "loading..." : isLogin ? "Log in" : "Sign up"}
       </button>
       <p>
         {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}

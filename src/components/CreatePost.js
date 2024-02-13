@@ -12,6 +12,7 @@ const CreatePost = () => {
   const [imagePath, setImagePath] = useState(null);
   const [imageName, setImageName] = useState(null);
   const dispatch = useDispatch();
+  const [isPosting, setIsPosting] = useState(false)
   const handlePostButtonClick = () => {
     handlePost({
       title,
@@ -19,6 +20,7 @@ const CreatePost = () => {
       token: auth.token,
       dispatch,
       user: auth.user,
+      setIsPosting
     });
   };
   return (
@@ -53,11 +55,11 @@ const CreatePost = () => {
           />
         </div>
         <button
-          disabled={(title == "" && !imagePath) || auth.loading}
+          disabled={(title == "" && !imagePath) || isPosting}
           onClick={handlePostButtonClick}
           className="disabled:opacity-45 bg-[--bg-dark] dark:bg-[--bg-light] dark:text-black text-white h-8 px-4 rounded-full font-semibold"
         >
-          {auth.loading?"Posting...":"Post"}
+          {isPosting?"Posting...":"Post"}
         </button>
       </div>
     </div>

@@ -3,23 +3,22 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../state/AuthSlice";
 import { useNavigate } from "react-router-dom";
-import { clearPosts } from "../state/PostSlice";
+import { clearPosts, setLoading } from "../state/PostSlice";
 
 const LogoutAlert = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const handleLogout = ()=>{
-        dispatch(logout())
-        dispatch(clearPosts())
-        navigate('/')
-    }
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(clearPosts());
+    dispatch(setLoading(true));
+    navigate("/");
+  };
   return (
     <div>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <button>
-            Logout
-          </button>
+          <button>Logout</button>
         </AlertDialog.Trigger>
         <AlertDialog.Content style={{ maxWidth: 450 }}>
           <AlertDialog.Title>Log out</AlertDialog.Title>
@@ -35,7 +34,7 @@ const LogoutAlert = () => {
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button variant="solid" color="red" onClick={handleLogout} >
+              <Button variant="solid" color="red" onClick={handleLogout}>
                 Log out
               </Button>
             </AlertDialog.Action>

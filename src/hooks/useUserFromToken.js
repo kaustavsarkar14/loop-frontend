@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
-import { setLoading, setUser } from "../state/AuthSlice";
+import { setAuthLoading, setUser } from "../state/AuthSlice";
 
 export default function useUserFromToken() {
   const dispatch = useDispatch();
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      dispatch(setLoading(false));
+      dispatch(setAuthLoading(false));
       return;
     }
     axios
@@ -20,11 +20,11 @@ export default function useUserFromToken() {
       })
       .then((response) => {
         dispatch(setUser({ user: response.data, token }));
-        dispatch(setLoading(false));
+        dispatch(setAuthLoading(false));
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
-        dispatch(setLoading(false));
+        dispatch(setAuthLoading(false));
       });
   }, [dispatch]);
 }

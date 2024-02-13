@@ -1,8 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "./constants";
 import toast from "react-hot-toast";
-import {  createPost } from "../state/PostSlice";
-import { setLoading } from "../state/AuthSlice";
+import { createPost, deletePost } from "../state/PostSlice";
 
 export async function handleImageUpload(e, setImagePath, setImageName) {
   if (!e.target.files[0]) return;
@@ -27,8 +26,15 @@ export async function handleImageUpload(e, setImagePath, setImageName) {
   }
 }
 
-export async function handlePost({ title, imageName, token, dispatch, user }) {
-  dispatch(setLoading(true))
+export async function handlePost({
+  title,
+  imageName,
+  token,
+  dispatch,
+  user,
+  setIsPosting,
+}) {
+  setIsPosting(true);
   try {
     const response = await axios.post(
       BASE_URL + "/post/create",
@@ -48,5 +54,26 @@ export async function handlePost({ title, imageName, token, dispatch, user }) {
     console.log(error);
     toast.error("Failed to send post");
   }
-  dispatch(setLoading(false))
+  setIsPosting(false);
+}
+
+export async function handleDeletePost({ postId, token, dispatch }) {
+  try {
+    // dispatch(deletePost({ postId }));
+    const response = await axios.post(
+      BASE_URL + "/post/delete",
+      {
+        postId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success("Post deleted");
+  } catch (error) {
+    toast.error("Post couldn't be deleted");
+    console.log(error);
+  }
 }
