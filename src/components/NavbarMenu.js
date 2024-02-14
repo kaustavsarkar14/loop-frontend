@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import { toggleTheme } from "../state/AppSlice";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutAlert from "./LogoutAlert";
+import { Link } from "react-router-dom";
 
 const NavbarMenu = () => {
   const theme = useSelector((state) => state.app.theme);
-  const dispatch = useDispatch()
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
   return (
     <div>
       <DropdownMenu.Root>
@@ -21,11 +23,17 @@ const NavbarMenu = () => {
           </div>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
-          <DropdownMenu.Item className="flex gap-3">
-            <p>Profile</p>
-            <AccountCircleOutlinedIcon fontSize="small" />
-          </DropdownMenu.Item>
-          <DropdownMenu.Item className="flex gap-3" onClick={()=>dispatch(toggleTheme())}>
+          <Link to={`/profile/${user._id}`}>
+            <DropdownMenu.Item className="flex gap-3">
+              <p>Profile</p>
+              <AccountCircleOutlinedIcon fontSize="small" />
+            </DropdownMenu.Item>
+          </Link>
+          
+          <DropdownMenu.Item
+            className="flex gap-3"
+           
+          >
             <p>{theme === "dark" ? "Light mode" : "Dark mode"}</p>
             {theme === "dark" ? (
               <LightModeRoundedIcon fontSize="small" />
@@ -33,8 +41,12 @@ const NavbarMenu = () => {
               <DarkModeRoundedIcon fontSize="small" />
             )}
           </DropdownMenu.Item>
-          <DropdownMenu.Item color="red" onClick={e=>e.preventDefault()} className="flex gap-3">
-            <LogoutAlert/>
+          <DropdownMenu.Item
+            color="red"
+            onClick={(e) => e.preventDefault()}
+            className="flex gap-3"
+          >
+            <LogoutAlert />
             <LogoutRoundedIcon fontSize="small" />
           </DropdownMenu.Item>
         </DropdownMenu.Content>

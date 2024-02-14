@@ -2,6 +2,7 @@ import axios from "axios";
 import { BASE_URL } from "./constants";
 import toast from "react-hot-toast";
 import { createPost, deletePost } from "../state/PostSlice";
+import { deletePostFromProfileFeed } from "../state/ProfileSlice";
 
 export async function handleImageUpload(e, setImagePath, setImageName) {
   if (!e.target.files[0]) return;
@@ -60,6 +61,7 @@ export async function handlePost({
 export async function handleDeletePost({ postId, token, dispatch }) {
   try {
     dispatch(deletePost({ postId }));
+    dispatch(deletePostFromProfileFeed({ postId }))
     const response = await axios.post(
       BASE_URL + "/post/delete",
       {

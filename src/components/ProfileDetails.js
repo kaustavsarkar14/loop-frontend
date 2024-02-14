@@ -44,8 +44,9 @@ const ProfileDetails = ({ id }) => {
             />
           </div>
           <h1 className="mt-2" >
-            {user.name}{" "}
+            {user.name}{" "} 
             <span className="text-sm opacity-50">@{user.username}</span>{" "}
+            {!isOwnProfile && followDetails?.isFollowing && <span className="text-xs bg-gray-600 rounded-sm p-1 text-white" >Follows you</span>}
           </h1>
           <p>
             {followingCount} Followings {followerCount} Followers

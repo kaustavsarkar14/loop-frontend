@@ -17,10 +17,14 @@ const Navbar = () => {
           <h1>LOGO</h1>
         </div>
         <div className="md:flex hidden w-[40%] justify-between">
+          <Link to={"/"} >
           <HomeOutlinedIcon />
+          </Link>
           <SearchRoundedIcon />
           <CreatePostAlert />
+          <Link to={user?`/profile/${user._id}`:'/login'} >
           <Person2OutlinedIcon />
+          </Link>
         </div>
         <div className="w-24 text-right">
           <Link to={"/login"}>

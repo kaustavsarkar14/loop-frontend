@@ -12,7 +12,6 @@ const ProfileDataSekeleton = () => {
           <h1 className="mt-2 animate-pulse bg-gray-300 dark:bg-gray-600 w-3/4 h-6 rounded-md"></h1>
           <p className="animate-pulse bg-gray-300 dark:bg-gray-600 w-1/2 h-4 rounded-md"></p>
         </div>
-        <button className="p-1 px-3 border rounded-full h-fit animate-pulse bg-gray-300 dark:bg-gray-600"></button>
       </div>
     </div>
   );

@@ -46,6 +46,9 @@ const ProfileSlice = createSlice({
     clearUserPosts: (state) => {
       state.userPosts = [];
     },
+    deletePostFromProfileFeed: (state, action)=>{
+        state.userPosts = state.userPosts.filter(post=>post._id!=action.payload.postId)
+    }
   },
 });
 
@@ -57,6 +60,7 @@ export const {
   setFollowCount,
   followUser,
   unFollowUser,
-  addUserPosts,clearUserPosts
+  addUserPosts,clearUserPosts,
+  deletePostFromProfileFeed
 } = ProfileSlice.actions;
 export default ProfileSlice.reducer;
