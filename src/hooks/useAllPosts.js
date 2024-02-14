@@ -13,9 +13,7 @@ export default function useAllPosts(page) {
         const response = await axios.get(
           BASE_URL + `/post/getall?page=${page}`
         );
-        console.log(response);
-        dispatch(addPosts(response.data));
-        console.log(response.data);
+        if(response.data.length>0)dispatch(addPosts(response.data));
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +27,7 @@ export default function useAllPosts(page) {
           },
         });
         console.log(`/post/get?page=${page}`)
-        dispatch(addPosts(response.data));
+        if(response.data.length>0)dispatch(addPosts(response.data));
       } catch (error) {
         console.log(error);
       }
