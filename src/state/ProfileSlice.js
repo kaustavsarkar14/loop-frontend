@@ -11,6 +11,8 @@ const ProfileSlice = createSlice({
     isOwnProfile: false,
     followDetails: null,
     userPosts: [],
+    page: 1,
+    isLastPage : false,
   },
   reducers: {
     setUser: (state, action) => {
@@ -48,6 +50,15 @@ const ProfileSlice = createSlice({
     },
     deletePostFromProfileFeed: (state, action)=>{
         state.userPosts = state.userPosts.filter(post=>post._id!=action.payload.postId)
+    },
+    increaseProfileFeedPage : (state)=>{
+      state.page += 1
+    },
+    resetProfilePageNumber : (state)=>{
+      state.page = 1
+    },
+    setIsLastPage: (state, action)=>{
+      state.isLastPage = action.payload
     }
   },
 });
@@ -61,6 +72,8 @@ export const {
   followUser,
   unFollowUser,
   addUserPosts,clearUserPosts,
-  deletePostFromProfileFeed
+  deletePostFromProfileFeed,
+  increaseProfileFeedPage,resetProfilePageNumber,
+  setIsLastPage
 } = ProfileSlice.actions;
 export default ProfileSlice.reducer;

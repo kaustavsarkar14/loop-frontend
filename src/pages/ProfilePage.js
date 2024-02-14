@@ -4,10 +4,12 @@ import ProfileDetails from "../components/ProfileDetails";
 import ProfileFeed from "../components/ProfileFeed";
 import Navbar from "../components/Navbar";
 import useUserPosts from "../hooks/useUserPosts";
+import useProfileFeedPagination from "../hooks/useProfileFeedPagination";
 
 const ProfilePage = () => {
   const { id } = useParams();
-  useUserPosts(id, 1)
+  useProfileFeedPagination()
+  useUserPosts(id)
   return (
     <div className="flex flex-col">
       <Navbar/>

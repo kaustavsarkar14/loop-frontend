@@ -29,10 +29,9 @@ const NavbarMenu = () => {
               <AccountCircleOutlinedIcon fontSize="small" />
             </DropdownMenu.Item>
           </Link>
-          
           <DropdownMenu.Item
             className="flex gap-3"
-           
+            onClick={() => dispatch(toggleTheme())}
           >
             <p>{theme === "dark" ? "Light mode" : "Dark mode"}</p>
             {theme === "dark" ? (
