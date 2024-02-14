@@ -5,6 +5,7 @@ import { BASE_URL } from "../utils/constants";
 import toast from "react-hot-toast";
 import { follow, unFollow } from "../utils/profileFunctions";
 import { followUser, unFollowUser } from "../state/ProfileSlice";
+import ProfileDataSekeleton from "./utils/ProfileDataSekeleton";
 
 const ProfileDetails = ({ id }) => {
   const {
@@ -27,7 +28,7 @@ const ProfileDetails = ({ id }) => {
     dispatch(unFollowUser());
     unFollow({ followingUserId: id, token });
   };
-  if (userLoading) return <h1>Loading...</h1>;
+  if (userLoading) return <ProfileDataSekeleton/>;
   return (
     <div className="relative rounded-md overflow-hidden min-h-96" >
       <div className="h-44 overflow-hidden shadow-md ">
@@ -79,7 +80,6 @@ const ProfileDetails = ({ id }) => {
           </button>
         )}
 
-        {}
       </div>
     </div>
   );

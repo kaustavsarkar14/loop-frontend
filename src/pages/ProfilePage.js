@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 import ProfileDetails from "../components/ProfileDetails";
 import ProfileFeed from "../components/ProfileFeed";
 import Navbar from "../components/Navbar";
+import useUserPosts from "../hooks/useUserPosts";
 
 const ProfilePage = () => {
   const { id } = useParams();
-  console.log(id);
+  useUserPosts(id, 1)
   return (
     <div className="flex flex-col">
       <Navbar/>
