@@ -6,10 +6,13 @@ import { ThemeProvider } from "@mui/material/styles";
 import useMUITheme from "./hooks/useMUITheme";
 import useUserFromToken from "./hooks/useUserFromToken";
 import Protected from "./components/utils/Protected";
+import useAllPosts from "./hooks/useAllPosts";
+import Toast from "./components/utils/Toast";
 
 function App() {
   const theme = useMUITheme();
   useUserFromToken();
+  useAllPosts()
   return (
     <ThemeProvider theme={theme}>
       <div className="dark:bg-[--bg-dark] bg-[--bg-light] min-h-screen text-[--text-dark] dark:text-[--text-light]">
@@ -19,6 +22,7 @@ function App() {
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="/verifymail" element={<ProfilePage />} />
         </Routes>
+        <Toast/>
       </div>
     </ThemeProvider>
   );

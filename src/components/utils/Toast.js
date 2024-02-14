@@ -11,7 +11,7 @@ const Toast = () => {
         style: {
           border: "1px solid #3B82F6",
           padding: "10px 16px",
-          color: "white",
+          color: theme=="dark"?"white":"black",
           backgroundColor:theme==="dark"?"#101010":"white",
         },
         iconTheme: {

@@ -5,6 +5,7 @@ const PostSlice = createSlice({
   initialState: {
     allPosts: [],
     loading: true,
+    page:1
   },
   reducers: {
     setLoading: (state, action) => {
@@ -21,9 +22,12 @@ const PostSlice = createSlice({
     },
     deletePost: (state, action)=>{
       state.allPosts = state.allPosts.filter((post)=>post._id!=action.payload.postId)
+    },
+    increasePage: (state, action)=>{
+      state.page = state.page+1
     }
   },
 });
 
-export const { setLoading, addPosts,createPost,clearPosts,deletePost } = PostSlice.actions;
+export const { setLoading, addPosts,createPost,clearPosts,deletePost, increasePage } = PostSlice.actions;
 export default PostSlice.reducer;

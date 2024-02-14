@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { increasePage } from "../state/PostSlice";
 
 export default function useScollPagination() {
-  const [page, setPage] = useState(1);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const handleScroll = () => {
       if (
         window.scrollY + window.innerHeight >=
         document.documentElement.scrollHeight - 10
       ) {
-        setPage((prevPage) => prevPage + 1);
+        dispatch(increasePage());
       }
     };
 
@@ -30,6 +31,4 @@ export default function useScollPagination() {
       }, delay);
     };
   }
-
-  return page;
 }
