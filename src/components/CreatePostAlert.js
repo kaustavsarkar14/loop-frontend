@@ -2,22 +2,25 @@ import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
 import React, { useState } from "react";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import { TextareaAutosize } from "@mui/material";
-import { handleImageUpload, handlePost } from "../utils/functions";
+import {  handlePost } from "../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../utils/constants";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 
 const CreatePostAlert = () => {
   const auth = useSelector((state) => state.auth);
   const [title, setTitle] = useState("");
-  const [imagePath, setImagePath] = useState(null);
-  const [imageName, setImageName] = useState(null);
+  const [file , setFile] = useState(null)
+  const [image , setImage] = useState(null)
   const [isPosting, setIsPosting] = useState(false);
   const dispatch = useDispatch();
+  const handleImageInput = (e)=>{
+    setImage(URL.createObjectURL(e.target.files[0]))
+    setFile(e.target.files[0])
+  }
   const handlePostButtonClick = () => {
     handlePost({
       title,
-      imageName,
+      file,
       token: auth.token,
       dispatch,
       user: auth.user,
@@ -37,7 +40,7 @@ const CreatePostAlert = () => {
             <img
               className="h-8 w-8 rounded-full object-cover"
               src={
-                BASE_URL + "/assets/" + auth.user?.picturePath ||
+                 auth.user?.picturePath ||
                 "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
               }
               alt=""
@@ -51,7 +54,7 @@ const CreatePostAlert = () => {
               className="border-none outline-none bg-transparent resize-none w-full"
               placeholder="Create a post..."
             />
-            <img src={imagePath} alt="" className="rounded-md mt-2" />
+            <img src={image} alt="" className="rounded-md mt-2" />
             <label htmlFor="picture">
               <AddPhotoAlternateOutlinedIcon />
             </label>
@@ -59,7 +62,7 @@ const CreatePostAlert = () => {
               id="picture"
               className="hidden"
               type="file"
-              onChange={(e) => handleImageUpload(e, setImagePath, setImageName)}
+              onChange={handleImageInput}
             />
           </div>
         </div>
@@ -71,7 +74,7 @@ const CreatePostAlert = () => {
             </Button>
           </Dialog.Close>
           <Button
-            disabled={(title == "" && !imagePath) || isPosting}
+            disabled={(title == "" && !image) || isPosting}
             onClick={handlePostButtonClick}
           >
             {isPosting ? "Posting..." : "Post"}

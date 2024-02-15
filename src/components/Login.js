@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthLoading, setUser } from "../state/AuthSlice";
 import { Navigate, useNavigate } from "react-router-dom";
-import { handleImageUpload } from "../utils/functions";
 import { clearPosts, setLoading } from "../state/PostSlice";
 
 const Login = () => {
@@ -27,20 +26,32 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [imageName, setImageName] = useState(null);
-  const [imagePath, setImagePath] = useState(null);
+  const [file, setFile] = useState(null);
+  const [image, setImage] = useState(null);
 
+  const handleImageInput = (e) => {
+    setImage(URL.createObjectURL(e.target.files[0]));
+    setFile(e.target.files[0]);
+  };
   const register = async () => {
-    const data = {
-      name,
-      email,
-      username,
-      password,
-      picturePath: imageName || "",
-    };
     setButtonLoading(true);
     try {
-      const response = await axios.post(BASE_URL + "/auth/register", data);
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", "loop-profile-images");
+      data.append("cloud_name", "dujoneujx");
+      const cld = await axios.post(
+        "https://api.cloudinary.com/v1_1/dujoneujx/upload",
+        data
+      );
+      const body = {
+        name,
+        email,
+        username,
+        password,
+        picturePath: cld.data.secure_url || "",
+      };
+      const response = await axios.post(BASE_URL + "/auth/register", body);
       console.log("this is res", response);
       toast.success("You're signed up!!");
       setIsLogin(true);
@@ -93,12 +104,8 @@ const Login = () => {
       <Toast />
       {!isLogin && (
         <div className="border border-[--border-light] flex justify-center items-center overflow-hidden h-32 w-32 rounded-full mb-5">
-          {imagePath && (
-            <img
-              src={imagePath}
-              className="h-full w-full object-cover"
-              alt=""
-            />
+          {image && (
+            <img src={image} className="h-full w-full object-cover" alt="" />
           )}
           <label htmlFor="picture" className="absolute">
             <AddPhotoAlternateOutlinedIcon />
@@ -107,7 +114,7 @@ const Login = () => {
             type="file"
             id="picture"
             className="hidden"
-            onInput={(e) => handleImageUpload(e, setImagePath, setImageName)}
+            onInput={handleImageInput}
           />
         </div>
       )}

@@ -1,7 +1,6 @@
 import React from "react";
 import useProfileData from "../hooks/useProfileData";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../utils/constants";
 import toast from "react-hot-toast";
 import { follow, unFollow } from "../utils/profileFunctions";
 import { followUser, unFollowUser } from "../state/ProfileSlice";
@@ -38,7 +37,7 @@ const ProfileDetails = ({ id }) => {
         <div className="flex flex-col">
           <div className="h-28 w-28 overflow-hidden rounded-full">
             <img
-              src={BASE_URL + "/assets/" + user.picturePath}
+              src={user.picturePath}
               alt=""
               className="w-full h-full object-cover"
             />

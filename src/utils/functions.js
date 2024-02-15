@@ -29,7 +29,7 @@ export async function handleImageUpload(e, setImagePath, setImageName) {
 
 export async function handlePost({
   title,
-  imageName,
+  file,
   token,
   dispatch,
   user,
@@ -37,11 +37,20 @@ export async function handlePost({
 }) {
   setIsPosting(true);
   try {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "loop-socialmedia");
+    data.append("cloud_name", "dujoneujx");
+    const cld = await axios.post(
+      "https://api.cloudinary.com/v1_1/dujoneujx/upload",
+      data
+    );
+    console.log(cld.data.secure_url);
     const response = await axios.post(
       BASE_URL + "/post/create",
       {
         title,
-        image: imageName || "",
+        image: cld.data.secure_url || "",
       },
       {
         headers: {
@@ -61,7 +70,7 @@ export async function handlePost({
 export async function handleDeletePost({ postId, token, dispatch }) {
   try {
     dispatch(deletePost({ postId }));
-    dispatch(deletePostFromProfileFeed({ postId }))
+    dispatch(deletePostFromProfileFeed({ postId }));
     const response = await axios.post(
       BASE_URL + "/post/delete",
       {
