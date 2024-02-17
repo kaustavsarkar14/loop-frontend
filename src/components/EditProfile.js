@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { PLACEHOLDER_BANNER } from "../utils/constants";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { editProfile } from "../utils/profileFunctions";
+import Toast from "./utils/Toast";
 
 const EditProfile = () => {
   const { token, user } = useSelector((state) => state.auth);
@@ -26,6 +27,7 @@ const EditProfile = () => {
   const [newBio, setNewBio] = useState(user.bio);
   const [occupation, setOccupation] = useState(user.occupation);
   const [location, setLocation] = useState(user.location);
+    const [isLoading, setIsLoading] = useState(false)
 
   const handleBannerImageInput = (e) => {
     setNewBanner(URL.createObjectURL(e.target.files[0]));
@@ -47,6 +49,7 @@ const EditProfile = () => {
       location,
       newProfileImageFile,
       newBannerFile,
+      setIsLoading
     });
   };
   return (
@@ -59,6 +62,7 @@ const EditProfile = () => {
         </Dialog.Trigger>
 
         <Dialog.Content style={{ maxWidth: 450 }}>
+          <Toast />
           <Dialog.Title>Edit profile</Dialog.Title>
           <Flex direction="column" gap="3">
             <AspectRatio ratio={16 / 4}>
@@ -176,7 +180,7 @@ const EditProfile = () => {
               </Button>
             </Dialog.Close>
             {/* <Dialog.Close> */}
-            <Button onClick={handleSaveButtonClick}>Save</Button>
+            <Button onClick={handleSaveButtonClick} disabled={isLoading} >{isLoading?"Saving...":"Save"}</Button>
             {/* </Dialog.Close> */}
           </Flex>
         </Dialog.Content>

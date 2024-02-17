@@ -41,7 +41,9 @@ export const editProfile = async ({
   location,
   newProfileImageFile,
   newBannerFile,
+  setIsLoading
 }) => {
+  setIsLoading(true)
   try {
     const data = new FormData();
     data.append("upload_preset", "bannerImages");
@@ -59,13 +61,13 @@ export const editProfile = async ({
     data2.append("cloud_name", "dujoneujx");
     let profileImage;
     if (newProfileImageFile) {
-      data.append("file", newProfileImageFile);
+      data2.append("file", newProfileImageFile);
       profileImage = await axios.post(
         "https://api.cloudinary.com/v1_1/dujoneujx/upload",
         data2
       );
     }
-
+  
     const response = await axios.post(
       BASE_URL + "/user/editprofile",
       {
@@ -85,8 +87,9 @@ export const editProfile = async ({
       }
     );
     console.log("res",response.data);
+    toast.success("Profile updated")
   } catch (error) {
-    console.log(error)
-    toast.error("There was some error.");
+    toast.error(error.response.data.error);
   }
+  setIsLoading(false)
 };
