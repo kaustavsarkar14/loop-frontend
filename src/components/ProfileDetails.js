@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import { follow, unFollow } from "../utils/profileFunctions";
 import { followUser, unFollowUser } from "../state/ProfileSlice";
 import ProfileDataSekeleton from "./utils/ProfileDataSekeleton";
+import EditProfile from "./EditProfile";
+import { PLACEHOLDER_BANNER } from "../utils/constants";
 
 const ProfileDetails = ({ id }) => {
   const {
@@ -31,7 +33,7 @@ const ProfileDetails = ({ id }) => {
   return (
     <div className="relative rounded-md overflow-hidden min-h-96" >
       <div className="h-44 overflow-hidden shadow-md ">
-        <img src={user?.bannerPath || "https://www.kudratikahumbo.com/wp-content/uploads/2019/12/Hero-Banner-Placeholder-Light-1024x480-1.png"} className="w-full h-full object-cover" alt="" />
+        <img src={user?.bannerPath || PLACEHOLDER_BANNER} className="w-full h-full object-cover" alt="" />
       </div>
       <div className="flex justify-between absolute -mt-12 w-full p-3">
         <div className="flex flex-col">
@@ -52,9 +54,7 @@ const ProfileDetails = ({ id }) => {
           </p>
         </div>
         {isOwnProfile ? (
-          <button className="p-1 px-3 border rounded-full h-fit mt-12">
-            Edit profile
-          </button>
+            <EditProfile/>
         ) : followDetails ? (
           followDetails.isFollower ? (
             <button
