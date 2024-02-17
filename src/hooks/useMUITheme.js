@@ -8,7 +8,7 @@ export default function useMUITheme() {
   const dispatch = useDispatch();
   useEffect(() => {
     const localTheme = localStorage.getItem("theme");
-    if (localTheme !== theme) {
+    if (localTheme == "light" && theme == "dark") {
       dispatch(toggleTheme());
     }
   }, []);
