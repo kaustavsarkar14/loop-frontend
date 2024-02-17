@@ -27,7 +27,7 @@ const EditProfile = () => {
   const [newBio, setNewBio] = useState(user.bio);
   const [occupation, setOccupation] = useState(user.occupation);
   const [location, setLocation] = useState(user.location);
-    const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleBannerImageInput = (e) => {
     setNewBanner(URL.createObjectURL(e.target.files[0]));
@@ -49,7 +49,7 @@ const EditProfile = () => {
       location,
       newProfileImageFile,
       newBannerFile,
-      setIsLoading
+      setIsLoading,
     });
   };
   return (
@@ -96,7 +96,7 @@ const EditProfile = () => {
                 htmlFor="profilePicture"
                 className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
               >
-                <div className="p-3 bg-black bg-opacity-40 rounded-full">
+                <div className="p-3 bg-black bg-opacity-40 rounded-full z-10">
                   <AddPhotoAlternateOutlinedIcon />
                 </div>
               </label>
@@ -106,13 +106,12 @@ const EditProfile = () => {
                 className="hidden"
                 onInput={handleProfileImageInput}
               />
-              <Avatar
-                size="6"
-                radius="full"
-                src={newProfileImage || user.picturePath}
-                fallback={user.name[0]}
-                className="m-auto"
-              />
+              <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-700" >
+                <img
+                className="wfull h-full object-cover"
+                  src={newProfileImage || user.picturePath}
+                />
+              </div>
             </div>
             <label>
               <Text as="div" size="2" mb="1" weight="bold">
@@ -168,6 +167,7 @@ const EditProfile = () => {
             </div>
             <TextArea
               value={newBio}
+              maxLength={280}
               onChange={(e) => setNewBio(e.target.value)}
               placeholder="Add bio"
             />
@@ -180,7 +180,9 @@ const EditProfile = () => {
               </Button>
             </Dialog.Close>
             {/* <Dialog.Close> */}
-            <Button onClick={handleSaveButtonClick} disabled={isLoading} >{isLoading?"Saving...":"Save"}</Button>
+            <Button onClick={handleSaveButtonClick} disabled={isLoading}>
+              {isLoading ? "Saving..." : "Save"}
+            </Button>
             {/* </Dialog.Close> */}
           </Flex>
         </Dialog.Content>

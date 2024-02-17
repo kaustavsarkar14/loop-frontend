@@ -7,6 +7,8 @@ import { followUser, unFollowUser } from "../state/ProfileSlice";
 import ProfileDataSekeleton from "./utils/ProfileDataSekeleton";
 import EditProfile from "./EditProfile";
 import { PLACEHOLDER_BANNER } from "../utils/constants";
+import { Briefcase, MapPin } from "lucide-react";
+import { Badge } from "@radix-ui/themes";
 
 const ProfileDetails = ({ id }) => {
   const {
@@ -29,14 +31,18 @@ const ProfileDetails = ({ id }) => {
     dispatch(unFollowUser());
     unFollow({ followingUserId: id, token });
   };
-  if (userLoading) return <ProfileDataSekeleton/>;
+  if (userLoading) return <ProfileDataSekeleton />;
   return (
-    <div className="relative rounded-md overflow-hidden min-h-96" >
+    <div className="relative rounded-md overflow-hidden min-h-[27rem]">
       <div className="h-44 overflow-hidden shadow-md ">
-        <img src={user?.bannerPath || PLACEHOLDER_BANNER} className="w-full h-full object-cover" alt="" />
+        <img
+          src={user?.bannerPath || PLACEHOLDER_BANNER}
+          className="w-full h-full object-cover"
+          alt=""
+        />
       </div>
       <div className="flex justify-between absolute -mt-12 w-full p-3">
-        <div className="flex flex-col">
+        <div className="flex flex-col max-w-full">
           <div className="h-28 w-28 overflow-hidden rounded-full">
             <img
               src={user.picturePath}
@@ -44,42 +50,56 @@ const ProfileDetails = ({ id }) => {
               className="w-full h-full object-cover"
             />
           </div>
-          <h1 className="mt-2" >
-            {user.name}{" "} 
+          <h1 className="mt-2">
+            <h1>{user.name}</h1>
             <span className="text-sm opacity-50">@{user.username}</span>{" "}
-            {!isOwnProfile && followDetails?.isFollowing && <span className="text-xs bg-gray-600 rounded-sm p-1 text-white" >Follows you</span>}
+            {!isOwnProfile && followDetails?.isFollowing && (
+               <Badge color="blue">Follows you</Badge>
+            )}
           </h1>
           <p>
             {followingCount} Followings {followerCount} Followers
           </p>
+         
+          <div className="flex gap-2" >
+            <div className="flex gap-1 opacity-50 items-center">
+              <MapPin size={17} /> <p>{user.location}</p>
+            </div>
+            <div className="flex gap-1 opacity-50 items-center">
+              <Briefcase size={17} /> <p>{user.occupation}</p>
+            </div>
+          </div>
+          <p className="text-sm" >{user.bio}</p>
         </div>
+        <div className="absolute right-4" >
+
         {isOwnProfile ? (
-            <EditProfile/>
-        ) : followDetails ? (
-          followDetails.isFollower ? (
-            <button
+          <EditProfile />
+          ) : followDetails ? (
+            followDetails.isFollower ? (
+              <button
               onClick={handleUnFollow}
               className="p-1 px-3 border dark:text-white text-black rounded-full h-fit mt-12"
-            >
+              >
               Unfollow
             </button>
           ) : (
             <button
-              className="p-1 px-3 bg-[--bg-dark] dark:bg-[--bg-light] text-white dark:text-black rounded-full h-fit mt-12"
-              onClick={handleFollow}
+            className="p-1 px-3 bg-[--bg-dark] dark:bg-[--bg-light] text-white dark:text-black rounded-full h-fit mt-12"
+            onClick={handleFollow}
             >
               Follow
             </button>
           )
-        ) : (
-          <button
+          ) : (
+            <button
             onClick={() => toast.error("Please login first")}
             className="p-1 px-3 bg-[--bg-dark] dark:bg-[--bg-light] text-white dark:text-black rounded-full h-fit mt-12"
-          >
+            >
             Follow
           </button>
         )}
-
+        </div>
       </div>
     </div>
   );
