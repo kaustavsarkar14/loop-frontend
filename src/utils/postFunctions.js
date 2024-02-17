@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "./constants";
 import toast from "react-hot-toast";
-import { createPost } from "../state/PostSlice";
+import { createPost, deletePost } from "../state/PostSlice";
 
 export const like = async ({ postId, token }) => {
   try {
@@ -75,10 +75,11 @@ export async function handleRepost({
     const response = await axios.post(
       BASE_URL + "/post/create",
       {
-        ...post,
+        userId : post.userId._id,
         isRepost: true,
         reposterId,
         originalPostId: post._id,
+        title: post.title
       },
       {
         headers: {
@@ -88,13 +89,13 @@ export async function handleRepost({
     );
     console.log(response);
     toast.success("Reposted");
-    dispatch(createPost([{ ...response.data, userId: user }]));
+    dispatch(createPost([{ ...response.data, userId: post.userId }]));
   } catch (error) {
     console.log(error);
     toast.error("Failed to send post");
   }
 }
-export async function handleUndoRepost({ post, token }) {
+export async function handleUndoRepost({ post, token, dispatch, user}) {
   try {
     const response = await axios.post(
       BASE_URL + "/post/undorepost",
@@ -109,7 +110,7 @@ export async function handleUndoRepost({ post, token }) {
     );
     console.log(response);
     toast.success("Repost deleted");
-    //   dispatch(deletePost({ originalPostId:post._id }));
+      dispatch(deletePost({ postId:post._id, userId:user._id }));
   } catch (error) {
     console.log(error);
     toast.error("Failed to send post");

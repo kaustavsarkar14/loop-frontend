@@ -18,6 +18,7 @@ import {
 } from "../utils/postFunctions";
 import toast from "react-hot-toast";
 import { PLACEHOLDER_PFP } from "../utils/constants";
+import { MessageCircle, Repeat2 } from "lucide-react";
 
 const Post = ({ post }) => {
   const [likeCount, setLikeCount] = useState(null);
@@ -61,7 +62,8 @@ const Post = ({ post }) => {
       handleRepost({ post, reposterId: user._id, token, user, dispatch });
       setIsRepost(true);
     } else {
-      handleUndoRepost({ post, token });
+      setRepostCount((repostCount) => repostCount - 1);
+      handleUndoRepost({ post, token, dispatch, user });
       setIsRepost(false);
     }
   };
@@ -109,7 +111,7 @@ const Post = ({ post }) => {
             </div>
           </Link>
           {post.title}
-          <div className="relative">
+          <div className="relative mt-2">
             {showLikeIcon && (
               <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ">
                 <img
@@ -130,11 +132,13 @@ const Post = ({ post }) => {
 
             <div className="w-full flex justify-between p-1 py-2 px-2">
               <button>
-                <ChatBubbleOutlineRoundedIcon />
+                {/* <ChatBubbleOutlineRoundedIcon /> */}
+                <MessageCircle />
               </button>
               <button onClick={repostButtonClick} className="flex">
                 <p>{repostCount > 0 && repostCount}</p>
-                <SyncRoundedIcon style={{ color: isRepost ? "#5ced73" : "" }} />
+                <Repeat2 style={{ color: isRepost ? "#5ced73" : "" }} />
+                {/* <SyncRoundedIcon style={{ color: isRepost ? "#5ced73" : "" }} /> */}
               </button>
               <button onClick={handleLikeButtonClick} className="flex">
                 <p>{likeCount > 0 && likeCount}</p>
