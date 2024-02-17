@@ -57,7 +57,6 @@ export const fetchReposts = async ({
 }) => {
   try {
     const response = await axios.post(BASE_URL + "/post/reposts", { postId });
-    console.log(response);
     setRepostCount(response.data.length)
     response.data.map(repostdoc=>{
         if(repostdoc.reposterId==userId) setIsRepost(true)

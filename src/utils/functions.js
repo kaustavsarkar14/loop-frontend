@@ -38,19 +38,22 @@ export async function handlePost({
   setIsPosting(true);
   try {
     const data = new FormData();
-    data.append("file", file);
     data.append("upload_preset", "loop-socialmedia");
     data.append("cloud_name", "dujoneujx");
-    const cld = await axios.post(
-      "https://api.cloudinary.com/v1_1/dujoneujx/upload",
-      data
-    );
-    console.log(cld.data.secure_url);
+    let cld
+    if (file) {
+      data.append("file", file);
+       cld = await axios.post(
+        "https://api.cloudinary.com/v1_1/dujoneujx/upload",
+        data
+      );
+    }
+
     const response = await axios.post(
       BASE_URL + "/post/create",
       {
         title,
-        image: cld.data.secure_url || "",
+        image: cld?.data?.secure_url || "",
       },
       {
         headers: {

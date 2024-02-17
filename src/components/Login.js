@@ -37,19 +37,22 @@ const Login = () => {
     setButtonLoading(true);
     try {
       const data = new FormData();
-      data.append("file", file);
       data.append("upload_preset", "loop-profile-images");
       data.append("cloud_name", "dujoneujx");
-      const cld = await axios.post(
-        "https://api.cloudinary.com/v1_1/dujoneujx/upload",
-        data
-      );
+      let cld;
+      if (file) {
+        data.append("file", file);
+        cld = await axios.post(
+          "https://api.cloudinary.com/v1_1/dujoneujx/upload",
+          data
+        );
+      }
       const body = {
         name,
         email,
         username,
         password,
-        picturePath: cld.data.secure_url || "",
+        picturePath: cld?.data.secure_url || "",
       };
       const response = await axios.post(BASE_URL + "/auth/register", body);
       console.log("this is res", response);
