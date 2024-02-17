@@ -4,6 +4,7 @@ add verification for user
 add verification with payment
 scrollbar style
 remove some posts from top after a certain amount of post 
+show feed accroding to following
 
 # Getting Started with Create React App
 

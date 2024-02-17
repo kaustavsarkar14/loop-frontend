@@ -19,14 +19,16 @@ import {
 import toast from "react-hot-toast";
 import { PLACEHOLDER_PFP } from "../utils/constants";
 import { MessageCircle, Repeat2 } from "lucide-react";
+import CommentContainer from "./comment/CommentContainer";
 
 const Post = ({ post }) => {
+  const { user, token } = useSelector((state) => state.auth);
   const [likeCount, setLikeCount] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [isRepost, setIsRepost] = useState(false);
   const [repostCount, setRepostCount] = useState(null);
   const [showLikeIcon, setShowLikeIcon] = useState(false);
-  const { user, token } = useSelector((state) => state.auth);
+  const [showCommentContainer, setShowCommentContainer ] = useState(false)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -81,14 +83,15 @@ const Post = ({ post }) => {
     }, 1000);
     return () => clearTimeout(timer);
   }, [showLikeIcon]);
+ 
   return (
     <div className="flex flex-col">
       {post.isRepost && (
-        <p className="text-sm opacity-50 my-1">
-          <SyncRoundedIcon fontSize="small" />{" "}
-          {user && post.reposterId === user._id ? "You" : post.reposterId?.name}{" "}
-          reposted
-        </p>
+        <div className="text-sm opacity-50 my-1 flex gap-2 items-center justify-start">
+          <Repeat2 size={16} />
+          <p>{user && post.reposterId?._id === user._id ? "You" : post.reposterId?.name}{" "}
+          reposted</p>
+        </div>
       )}
       <div className="flex border gap-2 p-2 pr-8 dark:border-[--border-light] rounded-md relative ">
         <Link to={`/profile/${post?.userId?._id}`}>
@@ -100,7 +103,7 @@ const Post = ({ post }) => {
             />
           </div>
         </Link>
-        <div>
+        <div className="w-full" >
           <Link to={`/profile/${post?.userId?._id}`}>
             <div className="flex gap-1 items-center">
               <h2 className="font-semibold">{post.userId?.name}</h2>
@@ -110,7 +113,7 @@ const Post = ({ post }) => {
               </h3>
             </div>
           </Link>
-          {post.title}
+          <p>{post.title}</p>
           <div className="relative mt-2">
             {showLikeIcon && (
               <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ">
@@ -130,17 +133,15 @@ const Post = ({ post }) => {
               />
             )}
 
-            <div className="w-full flex justify-between p-1 py-2 px-2">
-              <button>
-                {/* <ChatBubbleOutlineRoundedIcon /> */}
-                <MessageCircle />
+            <div className="w-[80%] flex justify-between p-1 py-2 px-2">
+              <button className="hover:opacity-60" onClick={()=>setShowCommentContainer(!showCommentContainer)} >
+                <MessageCircle size={20} />
               </button>
-              <button onClick={repostButtonClick} className="flex">
+              <button onClick={repostButtonClick} className="flex hover:opacity-60">
                 <p>{repostCount > 0 && repostCount}</p>
                 <Repeat2 style={{ color: isRepost ? "#5ced73" : "" }} />
-                {/* <SyncRoundedIcon style={{ color: isRepost ? "#5ced73" : "" }} /> */}
               </button>
-              <button onClick={handleLikeButtonClick} className="flex">
+              <button onClick={handleLikeButtonClick} className="flex hover:opacity-60">
                 <p>{likeCount > 0 && likeCount}</p>
                 {isLiked ? <FavoriteIcon /> : <FavoriteBorderRoundedIcon />}
               </button>
@@ -151,6 +152,7 @@ const Post = ({ post }) => {
           <PostMenu post={post} />
         </div>
       </div>
+      {showCommentContainer && <CommentContainer post={post} />}
     </div>
   );
 };

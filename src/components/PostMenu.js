@@ -15,10 +15,12 @@ const PostMenu = ({ post }) => {
           </div>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className="w-28">
-          <DropdownMenu.Item>Edit</DropdownMenu.Item>
+          {user && user._id == post.userId?._id && (
+            <DropdownMenu.Item>Edit</DropdownMenu.Item>
+          )}
           <DropdownMenu.Item>Share</DropdownMenu.Item>
           {user && user._id == post.userId?._id && (
-            <DropdownMenu.Item color="red" onClick={e=>e.preventDefault()}>
+            <DropdownMenu.Item color="red" onClick={(e) => e.preventDefault()}>
               <DeletePostAlert postId={post._id} />
             </DropdownMenu.Item>
           )}
