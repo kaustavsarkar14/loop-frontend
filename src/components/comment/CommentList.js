@@ -4,6 +4,7 @@ import { createComment, getCommets } from "../../utils/commentFunctions";
 import { useSelector } from "react-redux";
 import { TextField } from "@radix-ui/themes";
 import { SendHorizontal } from "lucide-react";
+import toast from "react-hot-toast";
 
 const CommentList = ({ comment }) => {
   const { token, user } = useSelector((state) => state.auth);
@@ -18,6 +19,7 @@ const CommentList = ({ comment }) => {
   }, []);
 
   const handleReply = () => {
+    if(!user) return toast.error("Please login first");
     createComment({
       postId: comment._id,
       comment: reply,
@@ -25,7 +27,8 @@ const CommentList = ({ comment }) => {
       user,
       setCommentSendLoading,
       setComments: setReplies,
-      setIsReplying, setShowReplies
+      setIsReplying,
+      setShowReplies,
     });
   };
   console.log("first", replies);
@@ -43,22 +46,31 @@ const CommentList = ({ comment }) => {
               onChange={(e) => setReply(e.target.value)}
             />
             <button
+            disabled={commentSendLoading || reply==''}
               onClick={handleReply}
-              className="absolute top-1/2 -translate-y-1/2 right-6"
+              className="absolute top-1/2 -translate-y-1/2 right-6 disabled:opacity-40"
             >
               <SendHorizontal opacity={commentSendLoading ? 0.5 : 1} />
             </button>
           </div>
         ) : (
           <div>
-           {replies.length > 0 && <button
-              className="text-xs ml-10 font-semibold mb-2"
-              onClick={() => {
-                setShowReplies(true);
-              }}
-            >
-               <p>{replies.length} Replies</p>
-            </button>}
+            {replies.length > 0 && (
+              <button
+                className="text-xs ml-10 font-semibold mb-2"
+                onClick={() => {
+                  setShowReplies(!showReplies);
+                }}
+              >
+                <p>
+                  {!showReplies
+                    ? replies.length > 0 && replies.length === 1
+                      ? `${replies.length} reply`
+                      : `${replies.length} replies`
+                    : "Hide replies"}
+                </p>
+              </button>
+            )}
             <button
               className="text-xs ml-10 font-semibold mb-2"
               onClick={() => {

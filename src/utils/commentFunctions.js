@@ -46,3 +46,13 @@ export const getCommets = async ({ postId, setComments }) => {
     console.log(error);
   }
 };
+
+
+export const fetchCommentCount = async ({ postId, setCommentCount }) => {
+  try {
+    const response = await axios.get(BASE_URL + `/comment/count/${postId}`);
+    setCommentCount(response.data.commentCount);
+  } catch (error) {
+    console.log(error);
+  }
+};

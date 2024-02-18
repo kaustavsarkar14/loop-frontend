@@ -4,6 +4,7 @@ import { createComment, getCommets } from "../../utils/commentFunctions";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CommentList from "./CommentList";
+import toast from "react-hot-toast";
 
 const CommentContainer = ({ post }) => {
   const [comment, setComment] = useState("");
@@ -12,6 +13,7 @@ const CommentContainer = ({ post }) => {
   const [comments, setComments] = useState([]);
 
   const handleSendComment = () => {
+    if(!user) return toast.error("Please login first");
     createComment({
       postId: post._id,
       comment,
@@ -32,8 +34,8 @@ const CommentContainer = ({ post }) => {
         onChange={(e) => setComment(e.target.value)}
       />
       <button
-        disabled={commentSendLoading}
-        className="absolute right-4  px-1 mt-1 opacity-90"
+        disabled={commentSendLoading || comment==''}
+        className="absolute right-4  px-1 mt-1 opacity-90 disabled:opacity-40"
         onClick={handleSendComment}
       >
         <SendHorizontal opacity={commentSendLoading ? 0.5 : 1} />
