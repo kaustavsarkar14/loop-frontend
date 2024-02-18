@@ -1,4 +1,4 @@
-import { Button, Dialog, Flex, Text, TextField, Tooltip } from "@radix-ui/themes";
+import { Avatar, Button, Dialog, Flex, Text, TextField, Tooltip } from "@radix-ui/themes";
 import React, { useState } from "react";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import { TextareaAutosize } from "@mui/material";
@@ -43,16 +43,7 @@ const CreatePostAlert = () => {
       <Toast/>
         <Dialog.Title>Create post</Dialog.Title>
         <div className="flex gap-2">
-          <div className="h-8 w-8 rounded-full">
-            <img
-              className="h-8 w-8 rounded-full object-cover"
-              src={
-                 auth.user?.picturePath ||
-                "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
-              }
-              alt=""
-            />
-          </div>
+        <Avatar src={auth?.user?.picturePath} fallback={auth?.user?.name[0]} radius="full" size="2" />
           <div>
             <TextareaAutosize
               value={AILoading?"Rewriting with AI...": title}

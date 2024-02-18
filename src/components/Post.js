@@ -21,6 +21,7 @@ import { PLACEHOLDER_PFP } from "../utils/constants";
 import { MessageCircle, Repeat2 } from "lucide-react";
 import CommentContainer from "./comment/CommentContainer";
 import { fetchCommentCount } from "../utils/commentFunctions";
+import { Avatar } from "@radix-ui/themes";
 
 const Post = ({ post }) => {
   const { user, token } = useSelector((state) => state.auth);
@@ -102,13 +103,7 @@ const Post = ({ post }) => {
       )}
       <div className="flex border gap-2 p-2 pr-8 dark:border-[--border-light] rounded-md relative ">
         <Link to={`/profile/${post?.userId?._id}`}>
-          <div className="h-8 w-8 rounded-full overflow-hidden">
-            <img
-              className="w-full h-full object-cover"
-              src={post.userId?.picturePath}
-              alt=""
-            />
-          </div>
+            <Avatar src={post.userId?.picturePath} fallback={post.userId.name[0]} radius="full" size="2" />
         </Link>
         <div className="w-full">
           <Link to={`/profile/${post?.userId?._id}`}>

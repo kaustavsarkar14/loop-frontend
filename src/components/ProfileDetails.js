@@ -8,7 +8,7 @@ import ProfileDataSekeleton from "./utils/ProfileDataSekeleton";
 import EditProfile from "./EditProfile";
 import { PLACEHOLDER_BANNER } from "../utils/constants";
 import { Briefcase, MapPin } from "lucide-react";
-import { Badge } from "@radix-ui/themes";
+import { Avatar, Badge } from "@radix-ui/themes";
 
 const ProfileDetails = ({ id }) => {
   const {
@@ -43,25 +43,26 @@ const ProfileDetails = ({ id }) => {
       </div>
       <div className="flex justify-between absolute -mt-12 w-full p-3">
         <div className="flex flex-col max-w-full">
-          <div className="h-28 w-28 overflow-hidden rounded-full">
-            <img
+          <div className="h-28 w-28 overflow-hidden rounded-full bg-black flex justify-center items-center">
+            <Avatar
               src={user.picturePath}
-              alt=""
-              className="w-full h-full object-cover"
+              fallback={user.name[0]}
+              radius="full"
+              size="8"
             />
           </div>
           <div className="mt-2">
             <h1>{user.name}</h1>
             <span className="text-sm opacity-50">@{user.username}</span>{" "}
             {!isOwnProfile && followDetails?.isFollowing && (
-               <Badge color="blue">Follows you</Badge>
+              <Badge color="blue">Follows you</Badge>
             )}
           </div>
           <p>
             {followingCount} Followings {followerCount} Followers
           </p>
-         
-          <div className="flex gap-2" >
+
+          <div className="flex gap-2">
             <div className="flex gap-1 opacity-50 items-center">
               <MapPin size={17} /> <p>{user.location}</p>
             </div>
@@ -69,36 +70,35 @@ const ProfileDetails = ({ id }) => {
               <Briefcase size={17} /> <p>{user.occupation}</p>
             </div>
           </div>
-          <p className="text-sm" >{user.bio}</p>
+          <p className="text-sm">{user.bio}</p>
         </div>
-        <div className="absolute right-4" >
-
-        {isOwnProfile ? (
-          <EditProfile />
+        <div className="absolute right-4">
+          {isOwnProfile ? (
+            <EditProfile />
           ) : followDetails ? (
             followDetails.isFollower ? (
               <button
-              onClick={handleUnFollow}
-              className="p-1 px-3 border dark:text-white text-black rounded-full h-fit mt-12"
+                onClick={handleUnFollow}
+                className="p-1 px-3 border dark:text-white text-black rounded-full h-fit mt-12"
               >
-              Unfollow
-            </button>
+                Unfollow
+              </button>
+            ) : (
+              <button
+                className="p-1 px-3 bg-[--bg-dark] dark:bg-[--bg-light] text-white dark:text-black rounded-full h-fit mt-12"
+                onClick={handleFollow}
+              >
+                Follow
+              </button>
+            )
           ) : (
             <button
-            className="p-1 px-3 bg-[--bg-dark] dark:bg-[--bg-light] text-white dark:text-black rounded-full h-fit mt-12"
-            onClick={handleFollow}
+              onClick={() => toast.error("Please login first")}
+              className="p-1 px-3 bg-[--bg-dark] dark:bg-[--bg-light] text-white dark:text-black rounded-full h-fit mt-12"
             >
               Follow
             </button>
-          )
-          ) : (
-            <button
-            onClick={() => toast.error("Please login first")}
-            className="p-1 px-3 bg-[--bg-dark] dark:bg-[--bg-light] text-white dark:text-black rounded-full h-fit mt-12"
-            >
-            Follow
-          </button>
-        )}
+          )}
         </div>
       </div>
     </div>
