@@ -8,6 +8,7 @@ import useUserFromToken from "./hooks/useUserFromToken";
 import Protected from "./components/utils/Protected";
 import useAllPosts from "./hooks/useAllPosts";
 import Toast from "./components/utils/Toast";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   const theme = useMUITheme();
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="/verifymail" element={<ProfilePage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
         <Toast/>
       </div>

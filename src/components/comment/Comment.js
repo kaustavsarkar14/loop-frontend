@@ -1,16 +1,12 @@
 import React from "react";
 import { calculateTime } from "../../utils/utilFunctions";
+import { Avatar } from "@radix-ui/themes";
 
 const Comment = ({ comment }) => {
   return (
     <div className=" flex gap-2 p-1 ">
-      <div className="h-6 w-6 rounded-full overflow-hidden">
-        <img
-          src={comment.userId.picturePath}
-          className="w-full h-full object-cover"
-          alt=""
-        />
-      </div>
+       <Avatar src={comment.userId.picturePath} fallback={comment.userId.name[0]} radius="full" size="2" />
+      
       <div className="flex flex-col">
         <div className="flex gap-2" >
           <h1 className="text-sm font-bold">{comment.userId.name}</h1>

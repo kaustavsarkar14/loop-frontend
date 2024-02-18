@@ -23,9 +23,9 @@ const Navbar = () => {
           >
             <HomeOutlinedIcon />
           </Link>
-          <div className="cursor-pointer  p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
+          <Link to={"/search"} className="cursor-pointer  p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
             <SearchRoundedIcon />
-          </div>
+          </Link>
           <div className="cursor-pointer p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
             <CreatePostAlert />
           </div>
@@ -55,9 +55,9 @@ const Navbar = () => {
           >
             <HomeOutlinedIcon />
           </Link>
-          <div className="cursor-pointer  p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
+          <Link to={"/search"} className="cursor-pointer  p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
             <SearchRoundedIcon />
-          </div>
+          </Link>
           <div className="cursor-pointer p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
             <CreatePostAlert />
           </div>
