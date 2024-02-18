@@ -7,14 +7,22 @@ import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CreatePostAlert from "./CreatePostAlert";
+import { SpinnerInfinity } from "spinners-react";
 
 const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   return (
     <>
       <div className="w-full sticky top-0 z-10 flex justify-between dark:bg-[--bg-black] bg-opacity-95 backdrop-blur-[16rem]  text-[--text-dark] dark:text-[--text-light] md:px-[10%] h-12 items-center px-8">
-        <div className="w-24">
-          <h1>LOGO</h1>
+        <div className="w-24 flex gap-2 items-center">
+        <SpinnerInfinity
+            color="white"
+            secondaryColor="#545454"
+            className="m-auto my-2"
+            speed={10}
+            size={40}
+          />
+          <h1 className="font-semibold tracking-wider" >LOOP</h1>
         </div>
         <div className="md:flex hidden w-[40%] justify-between">
           <Link
