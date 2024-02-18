@@ -61,7 +61,7 @@ const Post = ({ post }) => {
     }
   };
   const repostButtonClick = () => {
-    if (!user) toast.error("Please login first");
+    if (!user) return toast.error("Please login first");
     if (!isRepost) {
       setRepostCount((repostCount) => repostCount + 1);
       handleRepost({ post, reposterId: user._id, token, user, dispatch });

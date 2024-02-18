@@ -50,13 +50,13 @@ const ProfileDetails = ({ id }) => {
               className="w-full h-full object-cover"
             />
           </div>
-          <h1 className="mt-2">
+          <div className="mt-2">
             <h1>{user.name}</h1>
             <span className="text-sm opacity-50">@{user.username}</span>{" "}
             {!isOwnProfile && followDetails?.isFollowing && (
                <Badge color="blue">Follows you</Badge>
             )}
-          </h1>
+          </div>
           <p>
             {followingCount} Followings {followerCount} Followers
           </p>

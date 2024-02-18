@@ -5,6 +5,8 @@ import { TextareaAutosize } from "@mui/material";
 import {  handlePost } from "../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
+import toast from "react-hot-toast";
+import Toast from "./utils/Toast";
 
 const CreatePostAlert = () => {
   const auth = useSelector((state) => state.auth);
@@ -18,6 +20,7 @@ const CreatePostAlert = () => {
     setFile(e.target.files[0])
   }
   const handlePostButtonClick = () => {
+    if(!auth.user) return toast.error("Please login to create a post");
     handlePost({
       title,
       file,
@@ -34,6 +37,7 @@ const CreatePostAlert = () => {
       </Dialog.Trigger>
 
       <Dialog.Content style={{ maxWidth: 450 }}>
+      <Toast/>
         <Dialog.Title>Create post profile</Dialog.Title>
         <div className="flex gap-2">
           <div className="h-8 w-8 rounded-full">

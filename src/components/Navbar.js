@@ -17,13 +17,23 @@ const Navbar = () => {
           <h1>LOGO</h1>
         </div>
         <div className="md:flex hidden w-[40%] justify-between">
-          <Link to={"/"} >
-          <HomeOutlinedIcon />
+          <Link
+            to={"/"}
+            className="p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900"
+          >
+            <HomeOutlinedIcon />
           </Link>
-          <SearchRoundedIcon />
-          <CreatePostAlert />
-          <Link to={user?`/profile/${user._id}`:'/login'} >
-          <Person2OutlinedIcon />
+          <div className="cursor-pointer  p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
+            <SearchRoundedIcon />
+          </div>
+          <div className="cursor-pointer p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
+            <CreatePostAlert />
+          </div>
+          <Link
+            to={user ? `/profile/${user._id}` : "/login"}
+            className="p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900"
+          >
+            <Person2OutlinedIcon />
           </Link>
         </div>
         <div className="w-24 text-right">
@@ -39,10 +49,24 @@ const Navbar = () => {
         </div>
       </div>
       <div className="md:w-[25rem] md:hidden fixed z-20  left-1/2 translate-x-[-50%] flex justify-between bottom-0 right-0 w-full bg-white dark:bg-black p-3 bg-opacity-60 dark:bg-opacity-60 backdrop-blur-3xl">
-        <HomeOutlinedIcon />
-        <SearchRoundedIcon />
-        <CreatePostAlert />
-        <Person2OutlinedIcon />
+      <Link
+            to={"/"}
+            className="p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900"
+          >
+            <HomeOutlinedIcon />
+          </Link>
+          <div className="cursor-pointer  p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
+            <SearchRoundedIcon />
+          </div>
+          <div className="cursor-pointer p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900">
+            <CreatePostAlert />
+          </div>
+          <Link
+            to={user ? `/profile/${user._id}` : "/login"}
+            className="p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900"
+          >
+            <Person2OutlinedIcon />
+          </Link>
       </div>
     </>
   );
