@@ -3,7 +3,7 @@ import { calculateTime } from "../../utils/utilFunctions";
 
 const Comment = ({ comment }) => {
   return (
-    <div className=" flex gap-2 p-1">
+    <div className=" flex gap-2 p-1 ">
       <div className="h-6 w-6 rounded-full overflow-hidden">
         <img
           src={comment.userId.picturePath}

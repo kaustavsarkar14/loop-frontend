@@ -34,7 +34,7 @@ const CommentList = ({ comment }) => {
   console.log("first", replies);
   return (
     <div>
-      <div className="border mb-2 border-[--border-dark] dark:border-[--border-light] rounded-md">
+      <div className="border mb-2 border-[--border-dark] dark:border-[--border-light] rounded-md ">
         <Comment comment={comment} />
         {isReplying ? (
           <div className="relative p-3">
