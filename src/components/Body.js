@@ -6,7 +6,7 @@ import RightBar from './RightBar'
 const Body = () => {
   return (
     <div className='min-h-screen bg-[--bg-light] dark:bg-[--bg-dark] flex justify-center gap-6' >
-      <LeftBar/>
+      <LeftBar  />
         <Feed/>
       <RightBar/>
     </div>

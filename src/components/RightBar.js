@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 const RightBar = () => {
   const { user, token } = useSelector((state) => state.auth);
   const [isMailSent, setIsMailSent] = useState(false);
+
   const handleEmailVerify = async () => {
     try {
       await axios.post(
@@ -21,7 +22,7 @@ const RightBar = () => {
           },
         }
       );
-      setIsMailSent(true)
+      setIsMailSent(true);
       toast.success(
         "A verification email has been sent to your registered email"
       );
@@ -58,7 +59,7 @@ const RightBar = () => {
                   onClick={handleEmailVerify}
                   color={isMailSent && "cyan"}
                 >
-                  {isMailSent?"Mail sent": "Verify Email"}
+                  {isMailSent ? "Mail sent" : "Verify Email"}
                 </Button>
               )}
             </div>

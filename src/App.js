@@ -9,6 +9,7 @@ import Protected from "./components/utils/Protected";
 import useAllPosts from "./hooks/useAllPosts";
 import Toast from "./components/utils/Toast";
 import SearchPage from "./pages/SearchPage";
+import VerificationPage from "./pages/VerificationPage";
 
 function App() {
   const theme = useMUITheme();
@@ -21,7 +22,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile/:id" element={<ProfilePage />} />
-          <Route path="/verifymail" element={<ProfilePage />} />
+          <Route path="/verification" element={<VerificationPage />} />
           <Route path="/search" element={<SearchPage />} />
         </Routes>
         <Toast/>
