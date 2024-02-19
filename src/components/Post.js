@@ -18,7 +18,7 @@ import {
 } from "../utils/postFunctions";
 import toast from "react-hot-toast";
 import { PLACEHOLDER_PFP } from "../utils/constants";
-import { MessageCircle, Repeat2 } from "lucide-react";
+import { BadgeCheck, MessageCircle, Repeat2 } from "lucide-react";
 import CommentContainer from "./comment/CommentContainer";
 import { fetchCommentCount } from "../utils/commentFunctions";
 import { Avatar } from "@radix-ui/themes";
@@ -103,12 +103,24 @@ const Post = ({ post }) => {
       )}
       <div className="flex border gap-2 p-2 pr-8 dark:border-[--border-light] rounded-md relative ">
         <Link to={`/profile/${post?.userId?._id}`}>
-            <Avatar src={post.userId?.picturePath} fallback={post.userId.name[0]} radius="full" size="2" />
+          <Avatar
+            src={post.userId?.picturePath}
+            fallback={post.userId.name[0]}
+            radius="full"
+            size="2"
+          />
         </Link>
         <div className="w-full">
           <Link to={`/profile/${post?.userId?._id}`}>
             <div className="flex gap-1 items-center">
-              <h2 className="font-semibold">{post.userId?.name}</h2>
+              <h2 className="font-semibold">
+                {post.userId?.name}
+                {post.userId?.isVerified && (
+                  <span>
+                    <BadgeCheck className="inline ml-1" size="18" />
+                  </span>
+                )}
+              </h2>
               <h3 className="opacity-55 text-sm">
                 @{post.userId?.username} •{" "}
                 {calculateTime(post.creationDateAndTime)}

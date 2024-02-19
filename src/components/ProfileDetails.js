@@ -7,8 +7,8 @@ import { followUser, unFollowUser } from "../state/ProfileSlice";
 import ProfileDataSekeleton from "./utils/ProfileDataSekeleton";
 import EditProfile from "./EditProfile";
 import { PLACEHOLDER_BANNER } from "../utils/constants";
-import { Briefcase, MapPin } from "lucide-react";
-import { Avatar, Badge } from "@radix-ui/themes";
+import { BadgeCheck, Briefcase, MapPin } from "lucide-react";
+import { Avatar, Badge, Tooltip } from "@radix-ui/themes";
 
 const ProfileDetails = ({ id }) => {
   const {
@@ -41,7 +41,7 @@ const ProfileDetails = ({ id }) => {
           alt=""
         />
       </div>
-      <div className="flex justify-between absolute -mt-12 w-full p-3">
+      <div className="flex justify-between  -mt-12 w-full p-3">
         <div className="flex flex-col max-w-full">
           <div className="h-28 w-28 overflow-hidden rounded-full bg-black flex justify-center items-center">
             <Avatar
@@ -52,7 +52,17 @@ const ProfileDetails = ({ id }) => {
             />
           </div>
           <div className="mt-2">
-            <h1>{user.name}</h1>
+            <h1>
+              {user.name}
+
+              {user.isVerified && (
+                <Tooltip content="Verified User">
+                  <span>
+                    <BadgeCheck className="inline ml-1" size="18" />
+                  </span>
+                </Tooltip>
+              )}
+            </h1>
             <span className="text-sm opacity-50">@{user.username}</span>{" "}
             {!isOwnProfile && followDetails?.isFollowing && (
               <Badge color="blue">Follows you</Badge>

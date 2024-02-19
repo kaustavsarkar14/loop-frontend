@@ -10,7 +10,7 @@ const Feed = () => {
   const { allPosts, loading } = useSelector((state) => state.post);
   useScollPagination();
   return (
-    <div className="border flex flex-col gap-2 border-gray-200 dark:border-gray-900 min-h-screen md:w-[40%] w-full rounded-md p-2">
+    <div className="border flex flex-col gap-2 border-[--border-dark] dark:border-[--border-light] min-h-screen md:w-[40%] w-full rounded-md p-2">
       {user && <CreatePost />}
       {loading
         ? Array(5)
