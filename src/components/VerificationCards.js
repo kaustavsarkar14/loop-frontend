@@ -10,7 +10,46 @@ import toast from "react-hot-toast";
 const VerificationCards = () => {
   const { user, token } = useSelector((state) => state.auth);
   const [isMailSent, setIsMailSent] = useState(false);
-
+  const handleCheckout = async (amount) => {
+    try {
+        const {
+            data: { order },
+          } = await axios.post(BASE_URL+"/payment/checkout", {
+            amount:600,
+          });
+          const {
+            data: { key },
+          } = await axios.get(BASE_URL+"/key");
+      
+          var options = {
+            key: key,
+            amount: order.amount,
+            currency: "INR",
+            name: "LOOP",
+            description: "LOOP - monthly subscription",
+            image: "https://ih1.redbubble.net/image.463317902.1696/raf,360x360,075,t,fafafa:ca443f4786.jpg",
+            order_id: order.id,
+            callback_url: "http://localhost:8000/payment/verify/"+user._id,
+            prefill: {
+              name: "test user",
+              email: "pubggamer9762@gmail.com",
+              contact: "9000090000",
+            },
+            notes: {
+              address: "Metaverse",
+            },
+            theme: {
+              color: "#000000",
+            },
+            method: "upi",
+          };
+      
+          const razor = new window.Razorpay(options);
+          razor.open();
+    } catch (error) {
+        toast.error("Payment failed")
+    }
+  };
   const handleEmailVerify = async () => {
     try {
       await axios.post(
@@ -74,7 +113,7 @@ const VerificationCards = () => {
               {user.isVerified ? (
                 <BadgeCheck className="m-auto" size="3rem" />
               ) : (
-                <Button radius="full" variant="soft">
+                <Button radius="full" variant="soft" onClick={handleCheckout}>
                   Get verification badge
                 </Button>
               )}
