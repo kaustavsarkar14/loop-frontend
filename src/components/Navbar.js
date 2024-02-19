@@ -56,7 +56,7 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <div className="md:w-[25rem] md:hidden fixed z-20  left-1/2 translate-x-[-50%] flex justify-between bottom-0 right-0 w-full bg-white dark:bg-black p-3 bg-opacity-60 dark:bg-opacity-60 backdrop-blur-3xl">
+      <div className="md:w-64 md:hidden fixed z-50 flex justify-between items-center bottom-0 left-0 right-0 w-full bg-gradient-to-t from-white dark:from-black to-transparent  backdrop-blur-lg p-3">
       <Link
             to={"/"}
             className="p-1 px-2 rounded-md transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-900"
