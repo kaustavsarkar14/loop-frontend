@@ -10,6 +10,7 @@ import useAllPosts from "./hooks/useAllPosts";
 import Toast from "./components/utils/Toast";
 import SearchPage from "./pages/SearchPage";
 import VerificationPage from "./pages/VerificationPage";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 function App() {
   const theme = useMUITheme();
@@ -24,6 +25,7 @@ function App() {
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="/verification" element={<VerificationPage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/paymentsuccess" element={<PaymentSuccess />} />
         </Routes>
         <Toast/>
       </div>
