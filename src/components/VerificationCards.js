@@ -29,7 +29,7 @@ const VerificationCards = () => {
             description: "LOOP - monthly subscription",
             image: "https://ih1.redbubble.net/image.463317902.1696/raf,360x360,075,t,fafafa:ca443f4786.jpg",
             order_id: order.id,
-            callback_url: "http://localhost:8000/payment/verify/"+user._id,
+            callback_url: BASE_URL +"/payment/verify/"+user._id,
             prefill: {
               name: "test user",
               email: "pubggamer9762@gmail.com",
