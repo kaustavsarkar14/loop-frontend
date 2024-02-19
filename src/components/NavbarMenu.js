@@ -9,6 +9,7 @@ import { toggleTheme } from "../state/AppSlice";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutAlert from "./LogoutAlert";
 import { Link } from "react-router-dom";
+import { BadgeCheck } from "lucide-react";
 
 const NavbarMenu = () => {
   const theme = useSelector((state) => state.app.theme);
@@ -40,6 +41,12 @@ const NavbarMenu = () => {
               <DarkModeRoundedIcon fontSize="small" />
             )}
           </DropdownMenu.Item>
+          <Link to={`/verification`}>
+            <DropdownMenu.Item className="flex gap-3">
+              <p>Verification</p>
+              <BadgeCheck size="20" />
+            </DropdownMenu.Item>
+          </Link>
           <DropdownMenu.Item
             color="red"
             onClick={(e) => e.preventDefault()}
