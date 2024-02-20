@@ -8,7 +8,7 @@ export default function useScollPagination() {
     const handleScroll = () => {
       if (
         window.scrollY + window.innerHeight >=
-        document.documentElement.scrollHeight - 10
+        document.documentElement.scrollHeight - 40
       ) {
         dispatch(increasePage());
       }

@@ -6,13 +6,17 @@ const PostSlice = createSlice({
     allPosts: [],
     loading: true,
     page: 1,
+    newPageLoading: false,
   },
   reducers: {
     setLoading: (state, action) => {
       state.loading = action.payload;
+      state.newPageLoading = false
     },
     addPosts: (state, action) => {
+      state.newPageLoading = false
       state.allPosts = [...state.allPosts, ...action.payload];
+      if(state.allPosts.length>100) state.allPosts.splice(0,10) 
     },
     createPost: (state, action) => {
       state.allPosts = [...action.payload, ...state.allPosts];
@@ -35,6 +39,7 @@ const PostSlice = createSlice({
       
     },
     increasePage: (state, action) => {
+      state.newPageLoading = true
       state.page = state.page + 1;
     },
   },
