@@ -3,8 +3,11 @@ import React from "react";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import Toast from "./utils/Toast";
 import CreatePost from "./CreatePost";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const CreatePostAlert = () => {
+  const {user} = useSelector((state) => state.auth);
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -13,7 +16,7 @@ const CreatePostAlert = () => {
 
       <Dialog.Content style={{ maxWidth: 450 }}>
         <Toast />
-        <CreatePost />
+        {user?<CreatePost />:<Navigate to={"/login"} />}
       </Dialog.Content>
     </Dialog.Root>
   );

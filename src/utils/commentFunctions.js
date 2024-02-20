@@ -10,7 +10,7 @@ export const createComment = async ({
   setCommentSendLoading,
   setComments,
   setIsReplying,
-  setShowReplies,
+  setShowReplies,setComment
 }) => {
   setCommentSendLoading(true);
   try {
@@ -27,7 +27,7 @@ export const createComment = async ({
         },
       }
     );
-    console.log(response.data);
+    setComment('')
     setComments((comments) => [response.data, ...comments]);
     if (setIsReplying) setIsReplying(false);
     if (setShowReplies) setShowReplies(true);

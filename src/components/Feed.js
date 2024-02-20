@@ -11,7 +11,6 @@ const Feed = () => {
   const { allPosts, loading, newPageLoading } = useSelector(
     (state) => state.post
   );
-  console.log(newPageLoading);
   useScollPagination();
   return (
     <div className="border flex flex-col gap-2 border-[--border-dark] dark:border-[--border-light] min-h-screen md:w-[40%] w-full rounded-md p-2 md:pb-2 pb-10">

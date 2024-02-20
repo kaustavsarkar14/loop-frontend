@@ -19,7 +19,7 @@ const CommentContainer = ({ post }) => {
       comment,
       token,
       user,
-      setCommentSendLoading, setComments
+      setCommentSendLoading, setComments, setComment
     });
   };
   useEffect(() => {

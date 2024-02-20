@@ -28,7 +28,7 @@ const CommentList = ({ comment }) => {
       setCommentSendLoading,
       setComments: setReplies,
       setIsReplying,
-      setShowReplies,
+      setShowReplies, setComment:setReply
     });
   };
   console.log("first", replies);
