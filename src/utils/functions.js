@@ -33,7 +33,7 @@ export async function handlePost({
   token,
   dispatch,
   user,
-  setIsPosting,
+  setIsPosting, setTitle, setImage, setFile
 }) {
   setIsPosting(true);
   try {
@@ -61,6 +61,9 @@ export async function handlePost({
         },
       }
     );
+    setFile(null);
+    setImage(null);
+    setTitle("");
     toast.success("Post sent");
     dispatch(createPost([{ ...response.data, userId: user }]));
   } catch (error) {

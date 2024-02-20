@@ -1,10 +1,14 @@
 # TODO
 
-add verification for user
-add verification with payment
 scrollbar style
 remove some posts from top after a certain amount of post 
 show feed accroding to following
+increase area scroll 
+username is taken error
+clear inputs after send
+google login
+subscription plan 
+
 
 # Getting Started with Create React App
 

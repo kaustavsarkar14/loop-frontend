@@ -27,3 +27,24 @@ code {
   --app-dark: black;
   --app-light: white;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #393939;
+}
