@@ -21,7 +21,7 @@ const Feed = () => {
             .map((el, i) => <PostSkeleton key={i} />)
         : allPosts.map((post) => <Post key={post._id} post={post} />)}
 
-      <div className="w-full h-10 flex justify-center items-center">
+      <div className="w-full md:h-10 h-20 flex justify-center items-center">
         {newPageLoading ? (
           <SpinnerInfinity
             color="white"

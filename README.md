@@ -1,6 +1,5 @@
 # TODO
 
-username is taken error
 google login
 subscription plan 
 add instructions in right bar
