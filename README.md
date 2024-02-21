@@ -3,6 +3,8 @@
 google login
 subscription plan 
 add instructions in right bar
+make password strong check
+page for post + share option
 
 # Getting Started with Create React App
 

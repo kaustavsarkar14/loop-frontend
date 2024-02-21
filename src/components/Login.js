@@ -1,4 +1,3 @@
-import { Box, TextField } from "@mui/material";
 import React, { useState } from "react";
 import {
   validateLoginData,
@@ -13,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAuthLoading, setUser } from "../state/AuthSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 import { clearPosts, setLoading } from "../state/PostSlice";
+import { Button, TextField } from "@radix-ui/themes";
+import { SpinnerInfinity } from "spinners-react";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,6 @@ const Login = () => {
         picturePath: cld?.data.secure_url || "",
       };
       const response = await axios.post(BASE_URL + "/auth/register", body);
-      console.log("this is res", response);
       toast.success("You're signed up!!");
       setIsLogin(true);
     } catch (error) {
@@ -70,7 +70,6 @@ const Login = () => {
     const data = { loginId: email, password };
     try {
       const response = await axios.post(BASE_URL + "/auth/login", data);
-      console.log(response.data);
       toast.success("Logged in");
       dispatch(setUser(response.data));
       dispatch(clearPosts());
@@ -103,8 +102,15 @@ const Login = () => {
   };
   if (user) return <Navigate to={"/"} />;
   return (
-    <div className="bg-[--bg-light] dark:bg-[--bg-dark] md:w-fit w-full mx-auto flex flex-col gap-3 px-3 h-screen items-center justify-center text-[--text-dark] dark:text-[--text-light]">
+    <div className="bg-[--bg-light] dark:bg-[--bg-dark] md:w-[30rem] w-full mx-auto flex flex-col gap-3 px-3 h-screen items-center justify-start text-[--text-dark] dark:text-[--text-light] ">
       <Toast />
+      <SpinnerInfinity
+        color="white"
+        secondaryColor="#545454"
+        className="m-auto my-20"
+        speed={10}
+        size={110}
+      />
       {!isLogin && (
         <div className="border border-[--border-light] flex justify-center items-center overflow-hidden h-32 w-32 rounded-full mb-5">
           {image && (
@@ -122,90 +128,68 @@ const Login = () => {
         </div>
       )}
       {!isLogin && (
-        <Box
-          sx={{
-            width: 500,
-            maxWidth: "100%",
-          }}
-        >
-          <TextField
+        <div className="w-full flex flex-col">
+          <TextField.Input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            fullWidth
-            label="Name"
-            id="fullWidth"
+            placeholder="Your name"
           />
-        </Box>
+        </div>
       )}
-      <Box
-        sx={{
-          width: 500,
-          maxWidth: "100%",
-        }}
-      >
-        <TextField
-          fullWidth
+      <div className="w-full flex flex-col">
+        <TextField.Input
+          placeholder={isLogin ? "Email / Username" : "Email"}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          label={isLogin ? "Email / Username" : "Email"}
-          id="fullWidth"
         />
-      </Box>
+      </div>
       {!isLogin && (
-        <Box
-          sx={{
-            width: 500,
-            maxWidth: "100%",
-          }}
-        >
-          <TextField
+        <div className="w-full flex flex-col">
+          <TextField.Input
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            fullWidth
-            label="Username"
-            id="fullWidth"
+            placeholder="Username"
           />
-        </Box>
+        </div>
       )}
-      <Box
-        sx={{
-          width: 500,
-          maxWidth: "100%",
-        }}
-      >
-        <TextField
+      <div className="w-full flex flex-col">
+        <TextField.Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          fullWidth
-          label="Password"
           type="password"
-          id="fullWidth"
+          placeholder="Password"
         />
-      </Box>
+      </div>
       {!isLogin && (
-        <Box
-          sx={{
-            width: 500,
-            maxWidth: "100%",
-          }}
-        >
-          <TextField
+        <div className="w-full flex flex-col">
+          <TextField.Input
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            fullWidth
             type="password"
-            label="Password"
-            id="fullWidth"
+            placeholder="Confirm Password"
           />
-        </Box>
+        </div>
       )}
       <p className="text-red-500">{error}</p>
-      <button
+      <Button
+        variant="soft"
         onClick={handleLoginAndSignUp}
         className="font-semibold w-full text-[--text-dark] dark:text-[--text-light] border border-[--border-dark] dark:border-[--border-light] py-3 px-4 rounded-md mt-3"
       >
-        {isButtonLoading ? "loading..." : isLogin ? "Log in" : "Sign up"}
-      </button>
+        {isButtonLoading ? (
+          <SpinnerInfinity
+            color="white"
+            secondaryColor="#545454"
+            className="m-auto my-2"
+            speed={200}
+            size={30}
+          />
+        ) : isLogin ? (
+          "Log in"
+        ) : (
+          "Sign up"
+        )}
+      </Button>
       <p>
         {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
         <span className="cursor-pointer" onClick={() => setIsLogin(!isLogin)}>
