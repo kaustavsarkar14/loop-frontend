@@ -107,7 +107,7 @@ const Login = () => {
       <SpinnerInfinity
         color="white"
         secondaryColor="#545454"
-        className="m-auto my-20"
+        className="m-auto my-2"
         speed={10}
         size={110}
       />
