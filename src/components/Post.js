@@ -112,7 +112,7 @@ const Post = ({ post, isPostPage }) => {
           </p>
         </Link>
       )}
-      <Link to={"/post/" + post._id} className="flex border gap-2 p-2 pr-8 dark:border-[--border-light] rounded-md relative ">
+      <Link   className="flex border gap-2 p-2 pr-8 dark:border-[--border-light] rounded-md relative ">
         <Link to={`/profile/${post?.userId?._id}`}>
           <Avatar
             src={post.userId?.picturePath}

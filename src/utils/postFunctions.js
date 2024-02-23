@@ -57,10 +57,10 @@ export const fetchReposts = async ({
 }) => {
   try {
     const response = await axios.post(BASE_URL + "/post/reposts", { postId });
-    setRepostCount(response.data.length)
-    response.data.map(repostdoc=>{
-        if(repostdoc.reposterId==userId) setIsRepost(true)
-    })
+    setRepostCount(response.data.length);
+    response.data.map((repostdoc) => {
+      if (repostdoc.reposterId == userId) setIsRepost(true);
+    });
   } catch (error) {}
 };
 
@@ -75,12 +75,12 @@ export async function handleRepost({
     const response = await axios.post(
       BASE_URL + "/post/create",
       {
-        userId : post.userId._id,
+        userId: post.userId._id,
         isRepost: true,
         reposterId,
         originalPostId: post._id,
         title: post.title,
-        image:post.image
+        image: post.image,
       },
       {
         headers: {
@@ -90,13 +90,15 @@ export async function handleRepost({
     );
     console.log(response);
     toast.success("Reposted");
-    dispatch(createPost([{ ...response.data, userId: post.userId, reposterId  }]));
+    dispatch(
+      createPost([{ ...response.data, userId: post.userId, reposterId }])
+    );
   } catch (error) {
     console.log(error);
     toast.error("Failed to send post");
   }
 }
-export async function handleUndoRepost({ post, token, dispatch, user}) {
+export async function handleUndoRepost({ post, token, dispatch, user }) {
   try {
     const response = await axios.post(
       BASE_URL + "/post/undorepost",
@@ -111,9 +113,44 @@ export async function handleUndoRepost({ post, token, dispatch, user}) {
     );
     console.log(response);
     toast.success("Repost deleted");
-      dispatch(deletePost({ postId:post._id, userId:user._id }));
+    dispatch(deletePost({ postId: post._id, userId: user._id }));
   } catch (error) {
     console.log(error);
     toast.error("Failed to send post");
   }
 }
+
+export const editPost = async ({ postId, title, file, token, image }) => {
+  try {
+    const data = new FormData();
+    data.append("upload_preset", "loop-socialmedia");
+    data.append("cloud_name", "dujoneujx");
+    let cld;
+    if (file) {
+      data.append("file", file);
+      cld = await axios.post(
+        "https://api.cloudinary.com/v1_1/dujoneujx/upload",
+        data
+      );
+    }
+    const body = {};
+    if (file && cld) body.image = cld?.data?.secure_url;
+    if (title) body.title = title;
+    if (!image) body.image = "";
+
+    const response = await axios.post(
+      BASE_URL + "/post/edit",
+      { postId, data: body },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success("Post edited");
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+    toast.error("Some error occured");
+  }
+};
