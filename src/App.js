@@ -11,11 +11,12 @@ import Toast from "./components/utils/Toast";
 import SearchPage from "./pages/SearchPage";
 import VerificationPage from "./pages/VerificationPage";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import SinglePostPage from "./pages/SinglePostPage";
 
 function App() {
   const theme = useMUITheme();
   useUserFromToken();
-  useAllPosts()
+  useAllPosts();
   return (
     <ThemeProvider theme={theme}>
       <div className="dark:bg-[--bg-dark] bg-[--bg-light] min-h-screen text-[--text-dark] dark:text-[--text-light]">
@@ -26,8 +27,9 @@ function App() {
           <Route path="/verification" element={<VerificationPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+          <Route path="/post/:id" element={<SinglePostPage />} />
         </Routes>
-        <Toast/>
+        <Toast />
       </div>
     </ThemeProvider>
   );

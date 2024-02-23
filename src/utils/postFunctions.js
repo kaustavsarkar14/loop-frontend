@@ -79,7 +79,8 @@ export async function handleRepost({
         isRepost: true,
         reposterId,
         originalPostId: post._id,
-        title: post.title
+        title: post.title,
+        image:post.image
       },
       {
         headers: {
@@ -89,7 +90,7 @@ export async function handleRepost({
     );
     console.log(response);
     toast.success("Reposted");
-    dispatch(createPost([{ ...response.data, userId: post.userId }]));
+    dispatch(createPost([{ ...response.data, userId: post.userId, reposterId  }]));
   } catch (error) {
     console.log(error);
     toast.error("Failed to send post");

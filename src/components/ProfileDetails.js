@@ -73,12 +73,16 @@ const ProfileDetails = ({ id }) => {
           </p>
 
           <div className="flex gap-2">
-            <div className="flex gap-1 opacity-50 items-center">
-              <MapPin size={17} /> <p>{user.location}</p>
-            </div>
-            <div className="flex gap-1 opacity-50 items-center">
-              <Briefcase size={17} /> <p>{user.occupation}</p>
-            </div>
+            {user.location && (
+              <div className="flex gap-1 opacity-50 items-center">
+                <MapPin size={17} /> <p>{user.location}</p>
+              </div>
+            )}
+            {user.occupation && (
+              <div className="flex gap-1 opacity-50 items-center">
+                <Briefcase size={17} /> <p>{user.occupation}</p>
+              </div>
+            )}
           </div>
           <p className="text-sm">{user.bio}</p>
         </div>

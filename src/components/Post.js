@@ -23,7 +23,7 @@ import CommentContainer from "./comment/CommentContainer";
 import { fetchCommentCount } from "../utils/commentFunctions";
 import { Avatar } from "@radix-ui/themes";
 
-const Post = ({ post }) => {
+const Post = ({ post, isPostPage }) => {
   const { user, token } = useSelector((state) => state.auth);
   const [likeCount, setLikeCount] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
@@ -31,7 +31,9 @@ const Post = ({ post }) => {
   const [repostCount, setRepostCount] = useState(null);
   const [commentCount, setCommentCount] = useState(null);
   const [showLikeIcon, setShowLikeIcon] = useState(false);
-  const [showCommentContainer, setShowCommentContainer] = useState(false);
+  const [showCommentContainer, setShowCommentContainer] = useState(
+    isPostPage || false
+  );
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -89,12 +91,12 @@ const Post = ({ post }) => {
   }, [showLikeIcon]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       {post.isRepost && (
         <div className="text-sm opacity-50 my-1 flex gap-2 items-center justify-start">
           <Repeat2 size={16} />
           <p>
-            {user && post.reposterId?._id === user._id
+            {user && (post.reposterId?._id === user._id || post.reposterId === user._id)
               ? "You"
               : post.reposterId?.name}{" "}
             reposted

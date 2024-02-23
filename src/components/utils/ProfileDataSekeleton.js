@@ -9,8 +9,8 @@ const ProfileDataSekeleton = () => {
           <div className="h-28 w-28 bg-gray-600 rounded-full opacity-100">
             <div className="h-28 w-28 animate-pulse bg-gray-300 dark:bg-gray-600 rounded-full opacity-100"></div>
           </div>
-          <h1 className="mt-2 animate-pulse bg-gray-300 dark:bg-gray-600 w-3/4 h-6 rounded-md"></h1>
-          <p className="animate-pulse bg-gray-300 dark:bg-gray-600 w-1/2 h-4 rounded-md"></p>
+          <h1 className="mt-2 animate-pulse bg-gray-300 dark:bg-gray-600 w-[10rem] h-6 rounded-md"></h1>
+          <p className="animate-pulse bg-gray-300 dark:bg-gray-600 w-1/2 h-4 rounded-md mt-2"></p>
         </div>
       </div>
     </div>
