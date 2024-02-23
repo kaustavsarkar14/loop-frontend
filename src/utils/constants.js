@@ -8,4 +8,4 @@ export const BASE_URL = "https://loop-backend-2.vercel.app";
 // export const BASE_URL = "https://loop-jfzv.onrender.com"
 // export const BASE_URL = "https://loop-backend-production.up.railway.app"
 
-export const CLIENT_BASE_URL = "http://localhost:3000";
+export const CLIENT_BASE_URL = "https://loop-connect.vercel.app";

@@ -52,7 +52,7 @@ const Post = ({ post, isPostPage }) => {
     fetchCommentCount({ postId: post._id, setCommentCount });
   }, []);
   const handleLikeButtonClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!user) return toast.error("Please login first");
     if (!isLiked) {
       setLikeCount((likecount) => likecount + 1);
@@ -65,7 +65,7 @@ const Post = ({ post, isPostPage }) => {
     }
   };
   const repostButtonClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!user) return toast.error("Please login first");
     if (!isRepost) {
@@ -79,7 +79,7 @@ const Post = ({ post, isPostPage }) => {
     }
   };
   const handleDoubleClickOnImage = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!user) return;
     setShowLikeIcon(true);
@@ -87,7 +87,10 @@ const Post = ({ post, isPostPage }) => {
       handleLikeButtonClick();
     }
   };
-
+  const handleCommentButtonClick = (e) => {
+    e.preventDefault();
+    setShowCommentContainer(!showCommentContainer);
+  };
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLikeIcon(false);
@@ -96,19 +99,20 @@ const Post = ({ post, isPostPage }) => {
   }, [showLikeIcon]);
 
   return (
-    <Link to={"/post/"+post._id} className="flex flex-col w-full">
+    <div className="flex flex-col w-full">
       {post.isRepost && (
-        <div className="text-sm opacity-50 my-1 flex gap-2 items-center justify-start">
+        <Link className="text-sm opacity-50 my-1 flex gap-2 items-center justify-start">
           <Repeat2 size={16} />
           <p>
-            {user && (post.reposterId?._id === user._id || post.reposterId === user._id)
+            {user &&
+            (post.reposterId?._id === user._id || post.reposterId === user._id)
               ? "You"
               : post.reposterId?.name}{" "}
             reposted
           </p>
-        </div>
+        </Link>
       )}
-      <div className="flex border gap-2 p-2 pr-8 dark:border-[--border-light] rounded-md relative ">
+      <Link to={"/post/" + post._id} className="flex border gap-2 p-2 pr-8 dark:border-[--border-light] rounded-md relative ">
         <Link to={`/profile/${post?.userId?._id}`}>
           <Avatar
             src={post.userId?.picturePath}
@@ -148,8 +152,8 @@ const Post = ({ post, isPostPage }) => {
             {post.image != "" && (
               <img
                 className="rounded-md max-h-[30rem] border border-[--border-dark] dark:border-[--border-light]"
-                onClick={e=>e.preventDefault()}
-                onDoubleClick={e=>handleDoubleClickOnImage(e)}
+                onClick={(e) => e.preventDefault()}
+                onDoubleClick={(e) => handleDoubleClickOnImage(e)}
                 src={post.image}
                 alt=""
               />
@@ -158,20 +162,20 @@ const Post = ({ post, isPostPage }) => {
             <div className="w-[80%] flex justify-between p-1 py-2 px-2">
               <button
                 className="flex gap-1 hover:opacity-60"
-                onClick={() => setShowCommentContainer(!showCommentContainer)}
+                onClick={(e) => handleCommentButtonClick(e)}
               >
                 <MessageCircle size={20} />
                 <p>{commentCount > 0 && commentCount}</p>
               </button>
               <button
-                onClick={e=>repostButtonClick(e)}
+                onClick={(e) => repostButtonClick(e)}
                 className="flex gap-1 hover:opacity-60"
               >
                 <Repeat2 style={{ color: isRepost ? "#5ced73" : "" }} />
                 <p>{repostCount > 0 && repostCount}</p>
               </button>
               <button
-                onClick={e=>handleLikeButtonClick(e)}
+                onClick={(e) => handleLikeButtonClick(e)}
                 className="flex gap-1 hover:opacity-60"
               >
                 {isLiked ? <FavoriteIcon /> : <FavoriteBorderRoundedIcon />}
@@ -183,9 +187,9 @@ const Post = ({ post, isPostPage }) => {
         <div className="absolute right-4">
           <PostMenu post={post} />
         </div>
-      </div>
+      </Link>
       {showCommentContainer && <CommentContainer post={post} />}
-    </Link>
+    </div>
   );
 };
 
