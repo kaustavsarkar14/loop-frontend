@@ -7,3 +7,5 @@ export const PLACEHOLDER_BANNER =
 export const BASE_URL = "https://loop-backend-2.vercel.app";
 // export const BASE_URL = "https://loop-jfzv.onrender.com"
 // export const BASE_URL = "https://loop-backend-production.up.railway.app"
+
+export const CLIENT_BASE_URL = "http://localhost:3000";

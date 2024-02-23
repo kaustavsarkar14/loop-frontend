@@ -32,7 +32,7 @@ const CommentContainer = ({ post }) => {
         placeholder="Enter your email"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-      />
+      />F
       <button
         disabled={commentSendLoading || comment==''}
         className="absolute right-4  px-1 mt-1 opacity-90 disabled:opacity-40"

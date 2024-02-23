@@ -51,7 +51,8 @@ const Post = ({ post, isPostPage }) => {
     });
     fetchCommentCount({ postId: post._id, setCommentCount });
   }, []);
-  const handleLikeButtonClick = () => {
+  const handleLikeButtonClick = (e) => {
+    e.preventDefault()
     if (!user) return toast.error("Please login first");
     if (!isLiked) {
       setLikeCount((likecount) => likecount + 1);
@@ -63,7 +64,9 @@ const Post = ({ post, isPostPage }) => {
       setIsLiked(false);
     }
   };
-  const repostButtonClick = () => {
+  const repostButtonClick = (e) => {
+    e.preventDefault()
+
     if (!user) return toast.error("Please login first");
     if (!isRepost) {
       setRepostCount((repostCount) => repostCount + 1);
@@ -75,7 +78,9 @@ const Post = ({ post, isPostPage }) => {
       setIsRepost(false);
     }
   };
-  const handleDoubleClickOnImage = () => {
+  const handleDoubleClickOnImage = (e) => {
+    e.preventDefault()
+
     if (!user) return;
     setShowLikeIcon(true);
     if (!isLiked) {
@@ -91,7 +96,7 @@ const Post = ({ post, isPostPage }) => {
   }, [showLikeIcon]);
 
   return (
-    <div className="flex flex-col w-full">
+    <Link to={"/post/"+post._id} className="flex flex-col w-full">
       {post.isRepost && (
         <div className="text-sm opacity-50 my-1 flex gap-2 items-center justify-start">
           <Repeat2 size={16} />
@@ -143,7 +148,8 @@ const Post = ({ post, isPostPage }) => {
             {post.image != "" && (
               <img
                 className="rounded-md max-h-[30rem] border border-[--border-dark] dark:border-[--border-light]"
-                onDoubleClick={handleDoubleClickOnImage}
+                onClick={e=>e.preventDefault()}
+                onDoubleClick={e=>handleDoubleClickOnImage(e)}
                 src={post.image}
                 alt=""
               />
@@ -158,14 +164,14 @@ const Post = ({ post, isPostPage }) => {
                 <p>{commentCount > 0 && commentCount}</p>
               </button>
               <button
-                onClick={repostButtonClick}
+                onClick={e=>repostButtonClick(e)}
                 className="flex gap-1 hover:opacity-60"
               >
                 <Repeat2 style={{ color: isRepost ? "#5ced73" : "" }} />
                 <p>{repostCount > 0 && repostCount}</p>
               </button>
               <button
-                onClick={handleLikeButtonClick}
+                onClick={e=>handleLikeButtonClick(e)}
                 className="flex gap-1 hover:opacity-60"
               >
                 {isLiked ? <FavoriteIcon /> : <FavoriteBorderRoundedIcon />}
@@ -179,7 +185,7 @@ const Post = ({ post, isPostPage }) => {
         </div>
       </div>
       {showCommentContainer && <CommentContainer post={post} />}
-    </div>
+    </Link>
   );
 };
 
