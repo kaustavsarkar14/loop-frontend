@@ -14,8 +14,8 @@ const ShareCard = ({ postId }) => {
   }
   return (
     <AlertDialog.Root>
-      <AlertDialog.Trigger>
-        <button>Share</button>
+      <AlertDialog.Trigger className=" w-full">
+        <button className="text-start">Share</button>
       </AlertDialog.Trigger>
       <AlertDialog.Content style={{ maxWidth: 450 }}>
         <Toast/>

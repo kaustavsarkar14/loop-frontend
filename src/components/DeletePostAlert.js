@@ -12,8 +12,8 @@ const DeletePostAlert = ({ postId }) => {
 
   return (
     <AlertDialog.Root>
-      <AlertDialog.Trigger>
-        <button>Delete</button>
+      <AlertDialog.Trigger className=" w-full">
+        <button className="text-start">Delete</button>
       </AlertDialog.Trigger>
       <AlertDialog.Content style={{ maxWidth: 450 }}>
         <AlertDialog.Title>Delete post</AlertDialog.Title>
