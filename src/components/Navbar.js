@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <>
       <div className="w-full sticky top-0 z-10 flex justify-between dark:bg-[--bg-black] bg-opacity-95 backdrop-blur-[16rem]  text-[--text-dark] dark:text-[--text-light] md:px-[10%] h-12 items-center px-8">
-        <div className="w-24 flex gap-2 items-center">
+        <Link to={'/'} className="w-24 flex gap-2 items-center">
         <SpinnerInfinity
             color="white"
             secondaryColor="#545454"
@@ -23,7 +23,7 @@ const Navbar = () => {
             size={40}
           />
           <h1 className="font-semibold tracking-wider" >LOOP</h1>
-        </div>
+        </Link>
         <div className="md:flex hidden w-[40%] justify-between">
           <Link
             to={"/"}
