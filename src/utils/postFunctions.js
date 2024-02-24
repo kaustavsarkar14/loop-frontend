@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "./constants";
 import toast from "react-hot-toast";
-import { createPost, deletePost } from "../state/PostSlice";
+import { createPost, deletePost, editPost } from "../state/PostSlice";
 
 export const like = async ({ postId, token }) => {
   try {
@@ -120,8 +120,17 @@ export async function handleUndoRepost({ post, token, dispatch, user }) {
   }
 }
 
-export const editPost = async ({ postId, title, file, token, image }) => {
+export const handleEditPost = async ({
+  postId,
+  title,
+  file,
+  token,
+  image,
+  setIsSaving,
+  dispatch,
+}) => {
   try {
+    setIsSaving(true);
     const data = new FormData();
     data.append("upload_preset", "loop-socialmedia");
     data.append("cloud_name", "dujoneujx");
@@ -147,10 +156,12 @@ export const editPost = async ({ postId, title, file, token, image }) => {
         },
       }
     );
+    dispatch(editPost({ postId: response.data._id, post: response.data }));
     toast.success("Post edited");
-    console.log(response.data);
+    // console.log(response.data);
   } catch (error) {
     console.log(error);
     toast.error("Some error occured");
   }
+  setIsSaving(false);
 };

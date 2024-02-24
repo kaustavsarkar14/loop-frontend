@@ -8,13 +8,13 @@ import {
 } from "@radix-ui/themes";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { handleDeletePost } from "../utils/functions";
 import { SpinnerInfinity } from "spinners-react";
 import { Sparkles, XCircle } from "lucide-react";
 import { rewriteWithAI } from "../utils/rewriteWithAI";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { TextareaAutosize } from "@mui/material";
-import { editPost } from "../utils/postFunctions";
+import {  handleEditPost } from "../utils/postFunctions";
+import Toast from "./utils/Toast";
 
 const EditPost = ({ post }) => {
   const auth = useSelector((state) => state.auth);
@@ -26,7 +26,7 @@ const EditPost = ({ post }) => {
   const [AILoading, setAILoading] = useState(false);
 
   const handleEditButtonClick = () => {
-    editPost({
+    handleEditPost({
       postId: post._id,
       title,
       token: auth.token,
@@ -36,7 +36,8 @@ const EditPost = ({ post }) => {
       setTitle,
       setImage,
       setFile,
-      image,file
+      image,
+      file,
     });
   };
   const handleImageInput = (e) => {
@@ -49,7 +50,10 @@ const EditPost = ({ post }) => {
   };
   return (
     <AlertDialog.Root>
-      <AlertDialog.Trigger className="w-full" onClick={(e) => e.stopPropagation()}>
+      <AlertDialog.Trigger
+        className="w-full"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button className="text-start">Edit</button>
       </AlertDialog.Trigger>
 
@@ -57,6 +61,7 @@ const EditPost = ({ post }) => {
         style={{ maxWidth: 450 }}
         onClick={(e) => e.stopPropagation()}
       >
+        <Toast/>
         <div className="flex items-start gap-3 p-3 border border-[--border-dark] dark:border-[--border-light] rounded-md ">
           <Avatar
             src={auth.user.picturePath}
@@ -67,8 +72,11 @@ const EditPost = ({ post }) => {
 
           <div className="w-full">
             <TextareaAutosize
+              onKeyDown={(e) => e.stopPropagation()}
               value={AILoading ? "Rewriting with AI..." : title}
-              onChange={(e) => {setTitle(e.target.value)}}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
               aria-label="empty textarea"
               className="border-none outline-none bg-transparent resize-none w-full"
               placeholder="Create a post..."
