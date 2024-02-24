@@ -4,6 +4,7 @@ const AppSlice = createSlice({
   name: "app",
   initialState: {
     theme: "dark",
+    newUserList : []
   },
   reducers: {
     toggleTheme: (state, action) => {
@@ -15,8 +16,11 @@ const AppSlice = createSlice({
         document.documentElement.classList.add("dark");
       }
     },
+    addNewUsersList : (state,action)=>{
+      state.newUserList = action.payload
+    }
   },
 });
 
-export const { toggleTheme } = AppSlice.actions;
+export const { toggleTheme,addNewUsersList } = AppSlice.actions;
 export default AppSlice.reducer;

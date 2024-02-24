@@ -32,7 +32,11 @@ const NavbarMenu = () => {
           </Link>
           <DropdownMenu.Item
             className="flex gap-3"
-            onClick={() => dispatch(toggleTheme())}
+            // onClick={() => dispatch(toggleTheme())}
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(toggleTheme());
+            }}
           >
             <p>{theme === "dark" ? "Light mode" : "Dark mode"}</p>
             {theme === "dark" ? (
