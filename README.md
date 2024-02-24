@@ -1,8 +1,6 @@
 # TODO
 
 google login
-subscription plan 
-add instructions in right bar
 make password strong check
 
 # Getting Started with Create React App

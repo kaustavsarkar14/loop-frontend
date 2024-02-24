@@ -14,6 +14,7 @@ import { PLACEHOLDER_BANNER } from "../utils/constants";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { editProfile } from "../utils/profileFunctions";
 import Toast from "./utils/Toast";
+import { SpinnerInfinity } from "spinners-react";
 
 const EditProfile = () => {
   const { token, user } = useSelector((state) => state.auth);
@@ -106,9 +107,9 @@ const EditProfile = () => {
                 className="hidden"
                 onInput={handleProfileImageInput}
               />
-              <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-700" >
+              <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-700">
                 <img
-                className="wfull h-full object-cover"
+                  className="wfull h-full object-cover"
                   src={newProfileImage || user.picturePath}
                 />
               </div>
@@ -179,11 +180,19 @@ const EditProfile = () => {
                 Cancel
               </Button>
             </Dialog.Close>
-            {/* <Dialog.Close> */}
-            <Button onClick={handleSaveButtonClick} disabled={isLoading}>
-              {isLoading ? "Saving..." : "Save"}
+            <Button variant="soft" onClick={handleSaveButtonClick} disabled={isLoading}>
+              {isLoading ? (
+                <SpinnerInfinity
+                  color="white"
+                  secondaryColor="#545454"
+                  className="m-auto my-2"
+                  speed={200}
+                  size={30}
+                />
+              ) : (
+                "Save"
+              )}
             </Button>
-            {/* </Dialog.Close> */}
           </Flex>
         </Dialog.Content>
       </Dialog.Root>
