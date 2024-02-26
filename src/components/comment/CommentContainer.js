@@ -29,7 +29,7 @@ const CommentContainer = ({ post }) => {
     <div className="border relative flex flex-col gap-2 p-2 mt-2 mb-3 dark:border-[--border-light] rounded-md  ">
       <TextField.Input
       radius="full"
-        placeholder="Enter your email"
+        placeholder="Add a comment..."
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />

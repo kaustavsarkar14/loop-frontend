@@ -5,9 +5,14 @@ import PostSkeleton from "./utils/PostSkeleton";
 
 const ProfileFeed = () => {
   const { userPosts, feedLoading } = useSelector((state) => state.profile);
-  if (userPosts.length == 0 && !feedLoading) return <h1>There is no post</h1>;
+  if (userPosts.length == 0 && !feedLoading)
+    return (
+      <h1 className="text-center py-4 border-t border-[--border-dark] dark:border-[--border-light]">
+        No post yet
+      </h1>
+    );
   return (
-    <div>
+    <div className="border-t border-[--border-dark] dark:border-[--border-light] flex flex-col gap-2">
       {feedLoading
         ? Array(5)
             .fill(0)

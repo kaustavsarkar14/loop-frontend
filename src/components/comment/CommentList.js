@@ -41,7 +41,7 @@ const CommentList = ({ comment }) => {
             <TextField.Input
               ref={replyInput}
               radius="full"
-              placeholder="Enter your email"
+              placeholder="Add a reply..."
               value={reply}
               onChange={(e) => setReply(e.target.value)}
             />
