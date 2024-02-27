@@ -10,11 +10,13 @@ import SearchPage from "./pages/SearchPage";
 import VerificationPage from "./pages/VerificationPage";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import SinglePostPage from "./pages/SinglePostPage";
+import useFetchNewUser from "./hooks/useFetchNewUsers";
 
 function App() {
   useAppTheme();
   useUserFromToken();
   useAllPosts();
+  useFetchNewUser()
   return (
       <div className="dark:bg-[--bg-dark] bg-[--bg-light] min-h-screen text-[--text-dark] dark:text-[--text-light]">
         <Routes>

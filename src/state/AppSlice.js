@@ -4,7 +4,8 @@ const AppSlice = createSlice({
   name: "app",
   initialState: {
     theme: "dark",
-    newUserList : []
+    newUserList : [],
+    newUserListLoading: true,
   },
   reducers: {
     toggleTheme: (state, action) => {
@@ -17,7 +18,8 @@ const AppSlice = createSlice({
       }
     },
     addNewUsersList : (state,action)=>{
-      state.newUserList = action.payload
+      state.newUserList = action.payload;
+      state.newUserListLoading = false;
     }
   },
 });
