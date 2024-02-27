@@ -2,10 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
-import { ThemeProvider } from "@mui/material/styles";
-import useMUITheme from "./hooks/useMUITheme";
+import useAppTheme from "./hooks/useAppTheme";
 import useUserFromToken from "./hooks/useUserFromToken";
-import Protected from "./components/utils/Protected";
 import useAllPosts from "./hooks/useAllPosts";
 import Toast from "./components/utils/Toast";
 import SearchPage from "./pages/SearchPage";
@@ -14,11 +12,10 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import SinglePostPage from "./pages/SinglePostPage";
 
 function App() {
-  const theme = useMUITheme();
+  useAppTheme();
   useUserFromToken();
   useAllPosts();
   return (
-    <ThemeProvider theme={theme}>
       <div className="dark:bg-[--bg-dark] bg-[--bg-light] min-h-screen text-[--text-dark] dark:text-[--text-light]">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -31,7 +28,6 @@ function App() {
         </Routes>
         <Toast />
       </div>
-    </ThemeProvider>
   );
 }
 

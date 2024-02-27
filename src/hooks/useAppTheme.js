@@ -1,9 +1,8 @@
-import { createTheme } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../state/AppSlice";
 
-export default function useMUITheme() {
+export default function useAppTheme() {
   const theme = useSelector((state) => state.app.theme);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -15,10 +14,4 @@ export default function useMUITheme() {
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
-  const Theme = createTheme({
-    palette: {
-      mode: theme,
-    },
-  });
-  return Theme;
 }

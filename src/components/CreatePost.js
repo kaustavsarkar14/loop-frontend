@@ -4,7 +4,7 @@ import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternate
 import { handlePost } from "../utils/functions";
 import Toast from "./utils/Toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Avatar, IconButton, Tooltip } from "@radix-ui/themes";
+import { Avatar, Tooltip } from "@radix-ui/themes";
 import { Sparkles, XCircle } from "lucide-react";
 import { rewriteWithAI } from "../utils/rewriteWithAI";
 import { SpinnerInfinity } from "spinners-react";
