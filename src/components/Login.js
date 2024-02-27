@@ -170,7 +170,7 @@ const Login = () => {
           />
         </div>
       )}
-      <p className="text-red-500">{error}</p>
+      <p className="text-red-500 text-sm text-center">{error}</p>
       <Button
         variant="soft"
         onClick={handleLoginAndSignUp}

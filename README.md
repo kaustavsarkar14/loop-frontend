@@ -1,7 +1,4 @@
-# TODO
 
-google login
-make password strong check
 
 # Getting Started with Create React App
 
