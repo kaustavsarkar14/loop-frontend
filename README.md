@@ -3,6 +3,8 @@
 #### Live link to project : [https://loop-connect.vercel.app/](https://loop-connect.vercel.app/)
 ##### [BACKEND REPO LINK ](https://github.com/kaustavsarkar14/loop-backend)
 
+![desktop-home](https://github.com/kaustavsarkar14/loop-frontend/assets/93545845/f3d0c640-a514-43da-83f7-19a0965a3858)
+
 
 ### ⚙️ TECH STACK 
 - FRONTEND 
@@ -26,6 +28,11 @@
     - Razorpay
     - Bcrypt
     - Nodemailer
+![desktop-profile](https://github.com/kaustavsarkar14/loop-frontend/assets/93545845/b8cc2c6c-d19e-4c08-ac6c-4218931e4a86)
+![desktop-search](https://github.com/kaustavsarkar14/loop-frontend/assets/93545845/2eef8f9d-e124-48f7-8996-2af0caac6f8b)
+![desktop-create](https://github.com/kaustavsarkar14/loop-frontend/assets/93545845/129bb718-7c99-494d-a121-a112a089d294)
+![Untitled-1](https://github.com/kaustavsarkar14/loop-frontend/assets/93545845/a35ebce3-0d8f-41c7-bbf9-eae0f481ccca)
+![Untitled-2](https://github.com/kaustavsarkar14/loop-frontend/assets/93545845/53579798-9768-48a7-8350-bc8242398bfe)
 
 ### 💎 Features 
 - Nested Comments
