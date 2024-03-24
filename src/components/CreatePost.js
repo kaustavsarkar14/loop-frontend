@@ -55,7 +55,10 @@ const CreatePost = () => {
             value={AILoading ? "Rewriting with AI..." : title}
             onChange={(e) => setTitle(e.target.value)}
             aria-label="empty textarea"
-            className="border-none outline-none bg-transparent resize-none w-full"
+            className={
+              "border-none outline-none bg-transparent resize-none w-full " +
+              (AILoading ? "animate-pulse" : "")
+            }
             placeholder="Create a post..."
           />
           {image && (
